@@ -17,7 +17,7 @@ require_once("header.php");
 /// week start day Sunday
 /// get today's day, build the current week
 
-$today = "":
+$today = "";
 
 /// loop 0 - 6 (Sun - Sat)
 /// highlight today
@@ -25,11 +25,27 @@ $today = "":
 
 for ($d = 0; $d < 7; $d++)
 {
+  /// create a "date" based on differance of days of today and loop number
+  if ($d < date("w"))
+  {
+    $wd = date("l", mkdate(0, 0, 0, date("m"), date("d")-date("w"), date("Y"));
+  }
+  else if ($d > date("w"))
+  {
+    $wd = date("l", mkdate(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y"));
+  }
+  else
+  {
+    $wd = date("l");
+  }
+
+
+
   if ($d = date("w"))
   {
     echo "<b>";
   }
-  echo "$d";
+  echo "$d $wd";
   if ($d = date("w"))
   {
     echo "<b>";
