@@ -12,6 +12,7 @@ require_once("header.php");
     </nav>
   </div>
 
+  </div name="dbody">
 <?php
 /// create a table of week
 /// week start day Sunday
@@ -30,7 +31,7 @@ for ($d = 0; $d < 7; $d++)
   {
     $wd = date("l", mktime(0, 0, 0, date("m"), date("d")-date("w"), date("Y")));
   }
-  else if ($d > date("w"))
+  elseif ($d > date("w"))
   {
     $wd = date("l", mktime(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y")));
   }
@@ -45,7 +46,9 @@ for ($d = 0; $d < 7; $d++)
   {
     echo "<b>";
   }
+
   echo "$d $wd";
+
   if ($d = date("w"))
   {
     echo "<b>";
