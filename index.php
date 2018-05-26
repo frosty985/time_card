@@ -31,31 +31,19 @@ for ($d = 0; $d < 6; $d++)
   /// create a "date" based on differance of days of today and loop number
   if ($d < date("w"))
   {
-    $wd = date("l", mktime(0, 0, 0, date("m"), date("d")+$d-date("w"), date("Y")));
+    $mkd = mktime(0, 0, 0, date("m"), date("d")+$d-date("w"), date("Y"));
   }
   elseif ($d > date("w"))
   {
-    $wd = date("l", mktime(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y")));
+    $mkd = mktime(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y"));
   }
   else
   {
-    $wd = date("l");
+    $mkd = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
   }
 
+  echo "$d " . date("l", $mkd);
 
-
-  if ($d = date("w"))
-  {
-    echo "<b>";
-  }
-
-  echo "$d $wd";
-
-  if ($d = date("w"))
-  {
-    echo "<b>";
-  }
-  echo "<br>";
 }
 ?>
 
