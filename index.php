@@ -17,17 +17,23 @@ require_once("header.php");
 /// create a table of week
 /// week start day Sunday
 /// get today's day, build the current week
-
-$today = "";
-
 /// loop 0 - 6 (Sun - Sat)
 /// highlight today
 
 
-for ($d = 0; $d < 6; $d++)
-{
-  echo "$d < " . date("w") . "<br>";
+echo "<div class=\"dTable\">\n";
+echo "<div class=\"dTableBody\">\n";
 
+echo "<div class=\"dTableRow\">\n";
+echo "<div class=\"dTableHeading\">Day</div>\n";
+echo "<div class=\"dTableHeading\">Start</div>\n";
+echo "<div class=\"dTableHeading\">Break Start</div>\n";
+echo "<div class=\"dTableHeading\">Break Finsih</div>\n";
+echo "<div class=\"dTableHeading\">Finish</div>\n";
+echo "</div>\n";
+
+for ($d = 0; $d < 7; $d++)
+{
   /// create a "date" based on differance of days of today and loop number
   if ($d < date("w"))
   {
@@ -42,10 +48,13 @@ for ($d = 0; $d < 6; $d++)
     $mkd = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
   }
 
-  echo "$d " . date("l", $mkd);
+  echo "<div class=\"dTableRow\">\n";
+  echo "<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
+  echo "<div class=\"dTableHeading\"><input name=\"start_$d\"></div>\n";
+  echo "<div class=\"dTableHeading\"><input name=\"bstart_$d\"></div>\n";
+  echo "<div class=\"dTableHeading\"><input name=\"bfinish_$d\"></div>\n";
+  echo "<div class=\"dTableHeading\"><input name=\"finish_$d\"></div>\n";
+  echo "</div";
+
 
 }
-?>
-
-
-</div>
