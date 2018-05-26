@@ -1,3 +1,4 @@
+
 <?php
 
 require_once("config.php");
@@ -54,7 +55,7 @@ for ($d = 0; $d < 7; $d++)
   echo "<div class=\"dTableHeading\"><input name=\"bstart_$d\"></div>\n";
   echo "<div class=\"dTableHeading\"><input name=\"bfinish_$d\"></div>\n";
   echo "<div class=\"dTableHeading\"><input name=\"finish_$d\"></div>\n";
-  echo "</div";
+  echo "</div>";
 
 
 }
