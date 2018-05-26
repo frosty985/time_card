@@ -12,7 +12,7 @@ require_once("header.php");
     </nav>
   </div>
 
-  </div name="dbody">
+  <div name="dbody">
 <?php
 /// create a table of week
 /// week start day Sunday
