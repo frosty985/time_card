@@ -1,7 +1,7 @@
 <?php
 require_once("config.php");
 
-$user_sql = "SELECT uname, fname, lname FROM user WHERE uid='$uid';
+$user_sql = "SELECT uname, fname, lname FROM user WHERE uid='$uid'";
 $user_query = mysqli_query($user_sql, $db);
 $user = mysql_fetch_array($user_query);
 
