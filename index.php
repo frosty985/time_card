@@ -24,7 +24,7 @@ $today = "";
 /// highlight today
 
 
-for ($d = 0; $d < 7; $d++)
+for ($d = 0; $d <= 6; $d++)
 {
   echo "$d < " . date("w") . "<br>";;
   /// create a "date" based on differance of days of today and loop number
