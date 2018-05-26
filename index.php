@@ -28,11 +28,11 @@ for ($d = 0; $d < 7; $d++)
   /// create a "date" based on differance of days of today and loop number
   if ($d < date("w"))
   {
-    $wd = date("l", mkdate(0, 0, 0, date("m"), date("d")-date("w"), date("Y")));
+    $wd = date("l", mktime(0, 0, 0, date("m"), date("d")-date("w"), date("Y")));
   }
   else if ($d > date("w"))
   {
-    $wd = date("l", mkdate(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y")));
+    $wd = date("l", mktime(0, 0, 0, date("m"), date("d")-$d+date("w"), date("Y")));
   }
   else
   {
