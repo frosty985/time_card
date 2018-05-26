@@ -22,16 +22,16 @@ require_once("header.php");
 /// highlight today
 
 
-echo "<div class=\"dTable\">\n";
-echo "<div class=\"dTableBody\">\n";
+echo "\t\t<div class=\"dTable\">\n";
+echo "\t\t\t<div class=\"dTableBody\">\n";
 
-echo "<div class=\"dTableRow\">\n";
-echo "<div class=\"dTableHeading\">Day</div>\n";
-echo "<div class=\"dTableHeading\">Start</div>\n";
-echo "<div class=\"dTableHeading\">Break Start</div>\n";
-echo "<div class=\"dTableHeading\">Break Finsih</div>\n";
-echo "<div class=\"dTableHeading\">Finish</div>\n";
-echo "</div>\n";
+echo "\t\t\t\t<div class=\"dTableRow\">\n";
+echo "\t\t\t\t\t<div class=\"dTableHeading\">Day</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeading\">Start</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeading\">Break Start</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeading\">Break Finsih</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeading\">Finish</div>\n";
+echo "\t\t\t\t</div>\n";
 
 for ($d = 0; $d < 7; $d++)
 {
@@ -49,13 +49,18 @@ for ($d = 0; $d < 7; $d++)
     $mkd = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
   }
 
-  echo "<div class=\"dTableRow\">\n";
-  echo "<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
-  echo "<div class=\"dTableHeading\"><input name=\"start_$d\"></div>\n";
-  echo "<div class=\"dTableHeading\"><input name=\"bstart_$d\"></div>\n";
-  echo "<div class=\"dTableHeading\"><input name=\"bfinish_$d\"></div>\n";
-  echo "<div class=\"dTableHeading\"><input name=\"finish_$d\"></div>\n";
-  echo "</div>";
+  echo "\t\t\t\t<div class=\"dTableRow\">\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableHeading\"><input name=\"start_$d\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableHeading\"><input name=\"bstart_$d\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableHeading\"><input name=\"bfinish_$d\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableHeading\"><input name=\"finish_$d\"></div>\n";
+  echo "\t\t\t\t</div>";
 
 
 }
+
+echo "\t\t\t</div\n";
+echo "\t\t</div>\n";
+echo "\t</div\n";
+
