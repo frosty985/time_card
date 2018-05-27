@@ -48,18 +48,18 @@ echo "\t\t\t\t</div>\n";
 for ($d = 0; $d < 7; $d++)
 {
   /// create a "date" based on differance of days of today and loop number
-  if ($d < date("w"))
-  {
-    $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-$d+date("w", $start_date), date("Y", $start_date));
-  }
-  elseif ($d > date("w"))
-  {
+  //if ($d < date("w"))
+  //{
+  //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-$d+date("w", $start_date), date("Y", $start_date));
+  //}
+  //elseif ($d > date("w"))
+  //{
     $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+$d-date("w", $start_date), date("Y", $start_date));
-  }
-  else
-  {
-    $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
-  }
+  //}
+  //else
+  //{
+  //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
+  //}
 
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
 
