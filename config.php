@@ -9,6 +9,7 @@ $db = mysqli_connect($MySQL["host"], $MySQL["user"], $MySQL["pass"], $MySQL["dat
 
 $debug = "on";
 $uid = "0a25bf3160d211e899675254004146e6";
+$cid = "a406ab1860d111e899675254004146e6";
 
 if (!$db)
 {
