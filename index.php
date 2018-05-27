@@ -35,6 +35,7 @@ echo "\t\t<div class=\"dTable\">\n";
 echo "\t\t\t<div class=\"dTableBody\">\n";
 
 echo "\t\t\t\t<div class=\"dTableHeadRow\">\n";
+
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Day</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Type</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Start</div>\n";
@@ -42,6 +43,7 @@ echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Finsih</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Time</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Save</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Delete</div>\n";
+
 echo "\t\t\t\t</div>\n";
 
 for ($d = 0; $d < 7; $d++)
@@ -61,13 +63,15 @@ for ($d = 0; $d < 7; $d++)
   }
 
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
+
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"type_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Save\"></div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><a href=\"#\">X</a>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\"><a href=\"#\">X</a></div>\n";
+
   echo "\t\t\t\t</div>";
 
 
@@ -76,4 +80,4 @@ for ($d = 0; $d < 7; $d++)
 echo "\t\t\t</div\n";
 echo "\t\t</div>\n";
 echo "\t</div\n";
-
+echo "</div\n";
