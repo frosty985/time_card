@@ -14,6 +14,27 @@ else
 }
 
 ?>
+function calc(inp) {
+// get row number
+var row = inp.name.substring(inp.name.length-1, inp.name.length)
+// var inType = inp.name.substring(0, inp.name.length-2)
+
+// create vars for time
+var starttime = document.getElementById('start_' + row).value
+var stoptime = document.getElementById('finish_' + row).value
+
+// build date
+var startdate = new Date("01/01/2001 " + starttime)
+var stopdate = new Date("01/01/2001 " + stoptime)
+
+// calculate differance
+var hours = stopdate - startdate
+//alert(hours)
+
+// show differance
+document.getElementById('time_' + row).value = new Date(hours).toISOString().substr(11,8)
+}
+
 
 <div name="page">
   <div name="header">
@@ -66,11 +87,12 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
-  echo "\t\t\t\t\t\t\t<option value=\"________\">_________</option>\n";
+  echo "\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
+  echo "\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
   echo "\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t</div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\"></div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\" placeholder=\"HH:mm\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\" placeholder=\"HH:mm\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Save\"></div>\n";
 
