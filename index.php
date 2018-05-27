@@ -41,8 +41,7 @@ echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Type</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Start</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Finsih</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Time</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Save</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Delete</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Action</div>\n";
 
 echo "\t\t\t\t</div>\n";
 
@@ -74,7 +73,6 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Save\"></div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><a href=\"#\">X</a></div>\n";
 
   echo "\t\t\t\t</div>";
 
