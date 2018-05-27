@@ -7,10 +7,15 @@
   display: table-row;
 }
 
-.dTableHeadCell {
-}
-
 .dTableRow {
   display: table-row;
+}
+
+.dTableHeadCell {
+  display: table-cell;
+}
+
+.dTableCell {
+  display: table-cell;
 }
 
