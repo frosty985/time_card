@@ -65,8 +65,10 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"select\" name=\"type_$d\">\n";
-  echo "\t\t\t\t\t\t<option value=\"________\">_________</option>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
+  echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
+  echo "\t\t\t\t\t\t\t<option value=\"________\">_________</option>\n";
+  echo "\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t</div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\"></div>\n";
