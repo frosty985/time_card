@@ -105,7 +105,7 @@ for ($d = 0; $d < 7; $d++)
     }
     echo ">Shift</option>\n";
     echo "\t\t\t\t\t\t\t<option value=\"Break\"";
-    if ($day["sType"] == "Shift")
+    if ($day["sType"] == "Break")
     {
       echo " selected";
     }
