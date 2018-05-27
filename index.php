@@ -118,6 +118,9 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Delete\"></div>\n";
     echo "\t\t\t\t</div>";
 
+    echo "\t\t\t\t<div class=\"dTableRow\">\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
+
   }
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
