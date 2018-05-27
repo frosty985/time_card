@@ -116,6 +116,7 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d_\" id=\"finish_$d_\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d_\" id=\"time_$d_\" value=\"$day[dtime]\"></div>\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Delete\"></div>\n";
+    echo "\t\t\t\t</div>";
 
   }
 
