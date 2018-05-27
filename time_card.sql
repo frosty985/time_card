@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 26, 2018 at 10:22 AM
+-- Generation Time: May 27, 2018 at 11:03 AM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -28,8 +28,10 @@ USE `time_card`;
 -- Table structure for table `company`
 --
 -- Creation: May 26, 2018 at 09:09 AM
+-- Last update: May 26, 2018 at 10:44 AM
 --
 
+DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `cid` char(32) NOT NULL,
   `cname` varchar(255) NOT NULL
@@ -47,6 +49,7 @@ CREATE TABLE `company` (
 -- Creation: May 26, 2018 at 09:21 AM
 --
 
+DROP TABLE IF EXISTS `pass`;
 CREATE TABLE `pass` (
   `uid` char(32) NOT NULL,
   `hash` char(64) NOT NULL,
@@ -64,13 +67,15 @@ CREATE TABLE `pass` (
 --
 -- Table structure for table `time`
 --
--- Creation: May 26, 2018 at 09:21 AM
+-- Creation: May 27, 2018 at 10:00 AM
 --
 
+DROP TABLE IF EXISTS `time`;
 CREATE TABLE `time` (
   `tid` char(32) NOT NULL,
   `uid` char(32) NOT NULL,
   `cid` char(32) NOT NULL,
+  `sType` set('Shift','Break') NOT NULL,
   `tdate` date NOT NULL,
   `stime` time NOT NULL,
   `ftime` time NOT NULL,
@@ -91,8 +96,10 @@ CREATE TABLE `time` (
 -- Table structure for table `user`
 --
 -- Creation: May 26, 2018 at 09:05 AM
+-- Last update: May 26, 2018 at 10:46 AM
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `uid` char(32) NOT NULL,
   `uname` varchar(40) NOT NULL,
