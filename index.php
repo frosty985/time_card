@@ -16,7 +16,7 @@ else
 
 <script>
 
-function calc(inp) {
+function calc_time(inp) {
   // get row number
   var row = inp.name.substring(inp.name.length-1, inp.name.length)
   // var inType = inp.name.substring(0, inp.name.length-2)
@@ -95,8 +95,8 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
   echo "\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t</div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\" placeholder=\"HH:mm\"></div>\n";
-  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\" placeholder=\"HH:mm\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Save\"></div>\n";
 
