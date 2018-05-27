@@ -89,12 +89,43 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
+
+
+  // build query
+  $day_sql = "SELECT sType, tdate, stime, ftime, TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid'";
+  $day_query = mysqli_query($db, $day_sql);
+  while ($day = mysqli_fetch_array($day_query))
+  {
+    echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
+    echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
+    echo "\t\t\t\t\t\t\t<option value=\"Shift\"";
+    if ($day["sType"] == "Shift")
+    {
+      echo " selected";
+    }
+    echo ">Shift</option>\n";
+    echo "\t\t\t\t\t\t\t<option value=\"Break\"";
+    if ($day["sType"] == "Shift")
+    {
+      echo " selected";
+    }
+    echo ">Break</option>\n";
+    echo "\t\t\t\t\t\t</select>\n";
+    echo "\t\t\t\t\t</div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d_\" id=\"start_$d_\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d_\" id=\"finish_$d_\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d_\" id=\"time_$d_\" value=\"$day[dtime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Delete\"></div>\n";
+
+  }
+
   echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
   echo "\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
   echo "\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
   echo "\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t</div>\n";
+
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start_$d\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish_$d\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time_$d\" id=\"time_$d\"></div>\n";
