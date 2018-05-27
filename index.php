@@ -17,7 +17,7 @@ else
 
 <div name="page">
   <div name="header">
-    Welcome <?php echo "$user[fname]"; ?>.
+    Welcome <?php echo "$user[fname]"; ?>. Current date is <?php echo date("D M jS", $start_date); ?>
     <nav>
     </nav>
   </div>
