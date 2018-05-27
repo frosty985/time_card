@@ -34,7 +34,7 @@ else
 echo "\t\t<div class=\"dTable\">\n";
 echo "\t\t\t<div class=\"dTableBody\">\n";
 
-echo "\t\t\t\t<div class=\"dTableRow\">\n";
+echo "\t\t\t\t<div class=\"dTableHeadRow\">\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Day</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Type</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Start</div>\n";
