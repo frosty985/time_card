@@ -139,7 +139,7 @@ for ($d = 0; $d < 7; $d++)
 
 
 }
-$total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS "total" FROM `time` WHERE uid='$uid' AND cid='$cid'";
+$total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS "total" FROM `time` WHERE uid='$uid' AND cid='$cid'";
 $total_query = mysqli_query($db, $total_sql);
 $total = mysqli_fetch_array($total_query);
 
