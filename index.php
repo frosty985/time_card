@@ -12,28 +12,32 @@ else
 {
   $start_date = $_GET["start_date"];
 }
-
 ?>
+
+<script>
+
 function calc(inp) {
-// get row number
-var row = inp.name.substring(inp.name.length-1, inp.name.length)
-// var inType = inp.name.substring(0, inp.name.length-2)
+  // get row number
+  var row = inp.name.substring(inp.name.length-1, inp.name.length)
+  // var inType = inp.name.substring(0, inp.name.length-2)
 
-// create vars for time
-var starttime = document.getElementById('start_' + row).value
-var stoptime = document.getElementById('finish_' + row).value
+  // create vars for time
+  var starttime = document.getElementById('start_' + row).value
+  var stoptime = document.getElementById('finish_' + row).value
 
-// build date
-var startdate = new Date("01/01/2001 " + starttime)
-var stopdate = new Date("01/01/2001 " + stoptime)
+  // build date
+  var startdate = new Date("01/01/2001 " + starttime)
+  var stopdate = new Date("01/01/2001 " + stoptime)
 
-// calculate differance
-var hours = stopdate - startdate
-//alert(hours)
+  // calculate differance
+  var hours = stopdate - startdate
+  //alert(hours)
 
-// show differance
-document.getElementById('time_' + row).value = new Date(hours).toISOString().substr(11,8)
+  // show differance
+  document.getElementById('time_' + row).value = new Date(hours).toISOString().substr(11,8)
 }
+
+</script>
 
 
 <div name="page">
