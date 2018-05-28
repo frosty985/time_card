@@ -86,6 +86,7 @@ for ($d = 0; $d < 7; $d++)
   //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
   //}
 
+  echo "\t\t\t\t\t<form method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
@@ -124,7 +125,6 @@ for ($d = 0; $d < 7; $d++)
 
   }
 
-  echo "\t\t\t\t\t<form method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t\t<select name=\"type\">\n";
