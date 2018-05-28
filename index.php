@@ -135,7 +135,7 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d\"></div>\n";
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Save\"></div>\n";
+  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"submit\" name=\"save\" value=\"Save\"></div>\n";
   echo "\t\t\t\t\t</form>";
 
   echo "\t\t\t\t</div>";
