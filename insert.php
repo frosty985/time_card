@@ -11,6 +11,6 @@ if (isset($_POST["save"]))
   mysqli_query($db,$insert_query);
 }
 
-header('location: index.php');
+//header('location: index.php');
 
 ?>
