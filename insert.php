@@ -4,7 +4,7 @@ require_once("config.php");
 
 foreach($_POST as $Key => $val)
 {
-  ehco "$Key -> $val<br>\n";
+  echo "$Key -> $val<br>\n";
 }
 
 if (isset($_POST["save"]))
