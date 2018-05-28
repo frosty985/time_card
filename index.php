@@ -112,9 +112,9 @@ for ($d = 0; $d < 7; $d++)
     echo ">Break</option>\n";
     echo "\t\t\t\t\t\t</select>\n";
     echo "\t\t\t\t\t</div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d_\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d_\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d_\" value=\"$day[dtime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time\" value=\"$day[dtime]\"></div>\n";
     //echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Delete\"></div>\n";
     echo "\t\t\t\t</div>";
 
