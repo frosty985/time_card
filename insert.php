@@ -2,10 +2,10 @@
 
 require_once("config.php");
 
-//foreach($_POST as $Key => $val)
-//{
-//  echo "$Key -> $val<br>\n";
-//}
+foreach($_POST as $Key => $val)
+{
+  echo "$Key -> $val<br>\n";
+}
 
 if (isset($_POST["type"]))
 {
