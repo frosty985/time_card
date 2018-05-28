@@ -11,7 +11,7 @@ if (isset($_POST["save"]))
 {
   echo "INSERT";
   $insert_query = "INSERT INTO time tid, uid, cid, sType, tdate, stime, ftim, utime ";
-  $insert_query .= " VALUES REPLACE(UUID(), '-', ''), $uid, $cid, $_POST[start], $_POST[finish], $_POST[time], NOW() ;";
+  $insert_query .= " VALUES REPLACE(UUID(), '-', ''), $uid, $cid, $_POST[type], $_POST[tdate], $_POST[start], $_POST[finish], NOW() ;";
   mysqli_query($db,$insert_query);
 }
 
