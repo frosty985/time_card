@@ -2,6 +2,8 @@
 
 require_once("config.php");
 
+echo $_POST;
+
 if (isset($_POST["save"]))
 {
   $insert_query = "INSERT INTO time tid, uid, cid, sType, tdate, stime, ftim, utime ";
