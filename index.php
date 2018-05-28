@@ -124,6 +124,7 @@ for ($d = 0; $d < 7; $d++)
 
   }
 
+  echo "\t\t\t\t\t<form method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
   echo "\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
@@ -131,7 +132,6 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t</div>\n";
 
-  echo "\t\t\t\t\t<form method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d\"></div>\n";
