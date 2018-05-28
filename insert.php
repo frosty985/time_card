@@ -7,7 +7,7 @@ require_once("config.php");
 //  echo "$Key -> $val<br>\n";
 //}
 
-if (isset($_POST["save"]))
+if (isset($_POST["type"]))
 {
   $insert_query = "INSERT INTO time tid, uid, cid, sType, tdate, stime, ftim, utime ";
   $insert_query .= " VALUES REPLACE(UUID(), '-', ''), $uid, $cid, $_POST[start], $_POST[finish], $_POST[time], NOW() ;";
