@@ -79,6 +79,9 @@ function valid_form(fInput) {
   <div name="header">
     Welcome <?php echo "$user[fname]"; ?>. Current date is <?php echo date("D M jS", $start_date); ?>
     <nav>
+      <a href="?start_date=<?php echo mkdate(0, 0, 0, date("m", $start_date), date("d", $start_date)-7, date("Y", $start_date))?>">Back a week</a>
+      &nbsp;
+      <a href="?start_date=<?php echo mkdate(0, 0, 0, date("m", $start_date), date("d", $start_date)+7, date("Y", $start_date))?>">Forward a week</a>
     </nav>
   </div>
 
