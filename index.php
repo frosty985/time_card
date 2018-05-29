@@ -16,9 +16,9 @@ else
 
 <script>
 
-function calc_time(inp) {
+function calc_time(input) {
   // get row number
-  var row = inp.id.substring(inp.id.length-1, inp.id.length)
+  var row = input.id.substring(input.id.length-1, input.id.length)
   // var inType = inp.name.substring(0, inp.name.length-2)
 
   // create vars for time
@@ -36,6 +36,42 @@ function calc_time(inp) {
   // show differance
   document.getElementById('time_' + row).value = new Date(hours).toISOString().substr(11,8)
 }
+
+function valid_time(input)
+{
+  re = /^(\d{1,2}):(\d{2})/;
+  if (input.value != "")
+  {
+    if (regs = input.value.match(re))
+    {
+      alert(regs[1]);
+      if (regs[1] < 23)
+      {
+        alert(regs[2]);
+        if (regs[2] > 59)
+        {
+          alert("Invalid time");
+          return false;
+        }
+      }
+      else
+      {
+        alert("Invalid time");
+        return false;
+      }
+    }
+    return true;
+  }
+
+}
+
+function valid_form(fInput) {
+  if (!valid_time(fInput.start)) return false;
+  if (!valid_time(fInput.finish)) return false;
+  return true;
+
+}
+
 
 </script>
 
@@ -92,7 +128,7 @@ for ($d = 0; $d < 7; $d++)
   while ($day = mysqli_fetch_array($day_query))
   {
     echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
+    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\" onsubmit="return valid_form(this)">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
@@ -126,7 +162,7 @@ for ($d = 0; $d < 7; $d++)
 
   echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
   //echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
+  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\" onsubmit="return valid_form(this)">\n";
   echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
