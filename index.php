@@ -3,6 +3,16 @@
 require_once("config.php");
 require_once("header.php");
 
+/// create multi user, need session
+session_start()
+
+if (!isset($_SESSION['uid']))
+{
+  header("Location: login.php?ref=$PHPSELF");
+  exit();
+}
+
+
 if (!isset($_GET["start_date"]))
 {
   $start_date = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
