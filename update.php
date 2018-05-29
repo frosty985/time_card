@@ -1,4 +1,5 @@
 <?php
+require_once("config.php");
 
 if (isset($_POST["update"])) 
 {
@@ -14,6 +15,6 @@ if (isset($_POST["delete"]))
 
 mysqli_query($db, $update_sql);
 
-header(Location: "index.php");
+header("Location: index.php");
 
 ?>
