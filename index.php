@@ -128,7 +128,7 @@ for ($d = 0; $d < 7; $d++)
   while ($day = mysqli_fetch_array($day_query))
   {
     echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\" onsubmit="return valid_form(this)">\n";
+    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\" onsubmit=\"return valid_form(this)\">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
@@ -162,7 +162,7 @@ for ($d = 0; $d < 7; $d++)
 
   echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
   //echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\" onsubmit="return valid_form(this)">\n";
+  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\" onsubmit=\"return valid_form(this)\">\n";
   echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
