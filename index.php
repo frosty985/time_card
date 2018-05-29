@@ -86,7 +86,7 @@ for ($d = 0; $d < 7; $d++)
   //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
   //}
 
-  echo "\t\t\t\t\t<form method=\"post\" action=\"insert.php\">\n";
+  
   echo "\t\t\t\t<div class=\"dTableRow\">\n";
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
@@ -97,6 +97,7 @@ for ($d = 0; $d < 7; $d++)
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
+    echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
     echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
     echo "\t\t\t\t\t\t\t<option value=\"Shift\"";
@@ -117,7 +118,10 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time\" value=\"$day[dtime]\"></div>\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-    //echo "\t\t\t\t\t<div class=\"dTableCell\"><input type=\"Submit\" value=\"Delete\"></div>\n";
+    echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
+    echo "\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\">\n";
+    echo "\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\">\n";
+    echo "\t\t\t\t\t</div>\n";
     echo "\t\t\t\t</div>\n";
 
     echo "\t\t\t\t<div class=\"dTableRow\">\n";
@@ -125,6 +129,7 @@ for ($d = 0; $d < 7; $d++)
 
   }
 
+  echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">";
   echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t\t<select name=\"type\">\n";
