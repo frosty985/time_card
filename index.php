@@ -133,7 +133,7 @@ for ($d = 0; $d < 7; $d++)
   }
 
   echo "\t\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
-  echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">";
+  echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t\t\t<select name=\"type\">\n";
   echo "\t\t\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
