@@ -87,7 +87,7 @@ for ($d = 0; $d < 7; $d++)
   //}
 
   
-  echo "\t\t\t\t<div class=\"dTableRow\">\n";
+  echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
 
   echo "\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
 
@@ -97,7 +97,7 @@ for ($d = 0; $d < 7; $d++)
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
-    echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
+    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
     echo "\t\t\t\t\t\t\t<select name=\"type\">\n";
@@ -127,12 +127,12 @@ for ($d = 0; $d < 7; $d++)
     
     echo "\t\t\t\t</div>\n";
 
-    echo "\t\t\t\t<div class=\"dTableRow\">\n";
+    echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
 
   }
 
-  echo "\t\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
+  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t\t\t<select name=\"type\">\n";
