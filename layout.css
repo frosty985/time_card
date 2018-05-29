@@ -11,6 +11,10 @@
   display: table-row;
 }
 
+.dTableRowGroup {
+  display: table-row-group;
+}
+
 .dTableHeadCell {
   display: table-cell;
 }
