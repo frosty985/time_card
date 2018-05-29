@@ -62,7 +62,8 @@ function valid_time(input)
     }
     return true;
   }
-
+  alert("Invalid time");
+  return false;
 }
 
 function valid_form(fInput) {
