@@ -4,6 +4,8 @@ require_once("config.php");
 require_once("header.php");
 session_start();
 
+$login=false;
+
 if ($_POST["login"])
 {
   $login_sql = "SELECT user.uid AS uid FROM user JOIN pass ON pass.uid = user.uid WHERE username = \"". mysqli_real_escape_string($db, $_POST["uName"]) ."\";";
@@ -28,7 +30,7 @@ if ($_POST["login"])
   }
 }
 
-if ($login)
+if (isset($login))
 {
   header("Location: ". $_GET["ref"]);
   exit();
