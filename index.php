@@ -195,7 +195,7 @@ $total_sql .= " FROM `time` ";
 $total_sql .= " WHERE uid='$uid' AND cid='$cid' AND tdate >= \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-date("w", $start_date), date("Y", $start_date))) . "\" ";
 $total_sql .= " AND tdate =< \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7-date("w", $start_date), date("Y", $start_date))) . "\"; ";
 
-//echo $total_sql;
+echo $total_sql;
 $total_query = mysqli_query($db, $total_sql);
 $total = mysqli_fetch_array($total_query);
 
