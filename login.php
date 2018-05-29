@@ -21,16 +21,16 @@ if (isset($_POST["login"]))
     }
     else
     {
-      $failed = true;
+      $login = false;
     }
   }
   else
   {
-    $failed = true;
+    $login = false;
   }
 }
 
-if (isset($login))
+if ($login)
 {
   if (isset($_GET["ref"]))
   {
