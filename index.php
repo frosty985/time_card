@@ -86,14 +86,12 @@ for ($d = 0; $d < 7; $d++)
   //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
   //}
 
-  
-  echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-
   // build query
   $day_sql = "SELECT tid, sType, tdate, TIME_FORMAT(stime, \"%H:%i\") AS stime, TIME_FORMAT(ftime, \"%H:%i\") AS ftime, TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid' AND tdate = \"" . date("Y-m-d", $mkd) . "\"";
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
+    echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
     echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
@@ -124,12 +122,10 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t</form>\n";
     
     echo "\t\t\t\t</div>\n";
-
-    echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-
   }
 
+  echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
+  //echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
   echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
   echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
