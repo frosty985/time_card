@@ -44,10 +44,8 @@ function valid_time(input)
   {
     if (regs = input.value.match(re))
     {
-      alert(regs[1]);
       if (regs[1] < 23)
       {
-        alert(regs[2]);
         if (regs[2] > 59)
         {
           alert("Invalid time");
