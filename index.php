@@ -186,6 +186,8 @@ for ($d = 0; $d < 7; $d++)
 
 echo "\t\t\t\t<div class=\"dTableRow\">\n";
 echo "\t\t\t\t\t<div class\"dTableCell\">&nbsp;</div>\n";
+echo "\t\t\t\t\t<div class\"dTableCell\">&nbsp;</div>\n";
+echo "\t\t\t\t\t<div class\"dTableCell\">&nbsp;</div>\n";
 echo "\t\t\t\t\t<div class\"dTableCell\">Weekly Total:</div>\n";
 $total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\" FROM `time` WHERE uid='$uid' AND cid='$cid'";
 $total_query = mysqli_query($db, $total_sql);
