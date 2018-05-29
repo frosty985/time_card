@@ -9,7 +9,7 @@ require_once("config.php");
 if (isset($_POST["update"])) 
 {
   // update database
-  $update_sql = "UPDATE time SET stype = \"$_POST[type]\", stime = \"$_POST[start]\", ftime = \"$_POST[finish]\" WHERE tid = \"$_POST[tid]\"; ";
+  $update_sql = "UPDATE time SET stype = \"$_POST[type]\", stime = \"$_POST[start]\", ftime = \"$_POST[finish]\", utime = NOW() WHERE tid = \"$_POST[tid]\"; ";
 }
 
 if (isset($_POST["delete"]))
