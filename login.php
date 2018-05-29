@@ -15,7 +15,15 @@ if ($_POST["login"])
       $login = true;
       $hash = password_hash($_POST['pWord'], PASSWORD_DEFAULT);
       mysql_query($db, "UPDATE pass SET hash='$hash', updated=NOW() WHERE uid='$uid'");
+      $_SESSION["uid"];
     }
+    else
+    {
+      $failed = true;
+  }
+  else
+  {
+    $failed = true;
   }
 }
 
