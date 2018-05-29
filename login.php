@@ -32,7 +32,14 @@ if (isset($_POST["login"]))
 
 if (isset($login))
 {
-  header("Location: ". $_GET["ref"]);
+  if (isset($_GET["ref"]))
+  {
+    header("Location: ". $_GET["ref"]);
+  }
+  else
+  {
+    header("Location: index.php");
+  }
   exit();
 }
 
