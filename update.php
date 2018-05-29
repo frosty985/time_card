@@ -19,6 +19,7 @@ if (isset($_POST["delete"]))
 }
 
 mysqli_query($db, $update_sql);
+echo $update_sql;
 
 //header("Location: index.php");
 
