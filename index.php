@@ -93,11 +93,12 @@ for ($d = 0; $d < 7; $d++)
 
 
   // build query
-  $day_sql = "SELECT sType, tdate, stime, ftime, TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid' AND tdate = \"" . date("Y-m-d", $mkd) . "\"";
+  $day_sql = "SELECT tid, sType, tdate, stime, ftime, TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid' AND tdate = \"" . date("Y-m-d", $mkd) . "\"";
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
     echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
+    echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
     echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
     echo "\t\t\t\t\t\t\t<option value=\"Shift\"";
@@ -121,6 +122,7 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
     echo "\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\">\n";
     echo "\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\">\n";
+    echo "\t\t\t\t\t</form>\n";
     echo "\t\t\t\t\t</div>\n";
     echo "\t\t\t\t</div>\n";
 
