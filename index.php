@@ -18,7 +18,7 @@ else
 
 function calc_time(inp) {
   // get row number
-  var row = inp.name.substring(inp.name.length-1, inp.name.length)
+  var row = inp.id.substring(inp.id.length-1, inp.id.length)
   // var inType = inp.name.substring(0, inp.name.length-2)
 
   // create vars for time
