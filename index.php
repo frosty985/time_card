@@ -1,4 +1,3 @@
-
 <?php
 
 require_once("config.php");
@@ -193,7 +192,7 @@ echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Total:</div>\n";
 $total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\" ";
 $total_sql .= " FROM `time` ";
-$total_sql .= " WHERE uid='$uid' AND cid='$cid' AND tdate >= " . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-date("w", $start_date), date("Y", $start_date))) ";
+$total_sql .= " WHERE uid='$uid' AND cid='$cid' AND tdate >= " . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-date("w", $start_date), date("Y", $start_date)));
 $total_sql .= " AND tdate =< " . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7-date("w", $start_date), date("Y", $start_date))) . ";";
 
 echo $total_sql;
