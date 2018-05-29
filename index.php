@@ -101,7 +101,7 @@ echo "\t\t\t\t<div class=\"dTableHeadRow\">\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Day</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Type</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Start</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Finsih</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Finish</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Time</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Action</div>\n";
 
@@ -183,11 +183,14 @@ for ($d = 0; $d < 7; $d++)
 
 
 }
+
+echo "\t\t\t\t<div class=\"dTableRow\">\n";
+echo "\t\t\t\t\t<div class\"dTableCell\">Weekly Total:</div>\n";
 $total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\" FROM `time` WHERE uid='$uid' AND cid='$cid'";
 $total_query = mysqli_query($db, $total_sql);
 $total = mysqli_fetch_array($total_query);
 
-echo "$total[total]";
+echo "\t\t\t\t\t<div class=\"dTableCell\">$total[total]</div>\n";
 
 echo "\t\t\t</div\n";
 echo "\t\t</div>\n";
