@@ -20,6 +20,7 @@ if ($_POST["login"])
     else
     {
       $failed = true;
+    }
   }
   else
   {
