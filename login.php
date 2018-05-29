@@ -12,7 +12,7 @@ if (isset($_POST["login"]))
   $login_query = mysqli_query($db, $login_sql);
   if ($login_check = mysqli_fetch_array($login_query))
   {
-    if (password_verify($_POST['pWord'], $login_check[hash]))
+    if (password_verify($_POST["pWord"], $login_check["hash"]))
     {
       $login = true;
       $hash = password_hash($_POST['pWord'], PASSWORD_DEFAULT);
