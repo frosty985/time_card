@@ -93,7 +93,7 @@ for ($d = 0; $d < 7; $d++)
 
 
   // build query
-  $day_sql = "SELECT tid, sType, tdate, stime, ftime, TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid' AND tdate = \"" . date("Y-m-d", $mkd) . "\"";
+  $day_sql = "SELECT tid, sType, tdate, TIME_FORMAT(stime, \"%H:%i\"), TIME_FORMAT(ftime, \"%H:%i\"), TIME_FORMAT(TIMEDIFF(ftime, stime), \"%H:%i\") AS dtime FROM time WHERE uid='$uid' AND cid='$cid' AND tdate = \"" . date("Y-m-d", $mkd) . "\"";
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
