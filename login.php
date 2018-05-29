@@ -6,7 +6,7 @@ session_start();
 
 $login=false;
 
-if ($_POST["login"])
+if (isset($_POST["login"]))
 {
   $login_sql = "SELECT user.uid AS uid FROM user JOIN pass ON pass.uid = user.uid WHERE username = \"". mysqli_real_escape_string($db, $_POST["uName"]) ."\";";
   $login_query = mysqli_query($db, $login_sql);
