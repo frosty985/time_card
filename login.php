@@ -9,9 +9,11 @@ $login = false;
 if (isset($_POST["login"]))
 {
   $login_sql = "SELECT user.uid AS uid FROM user JOIN pass ON pass.uid = user.uid WHERE uName = \"". mysqli_real_escape_string($db, $_POST["uName"]) ."\";";
+  echo $login_sql;
   $login_query = mysqli_query($db, $login_sql);
   if ($login_check = mysqli_fetch_array($login_query))
   {
+  echo "SO FAR";
     if (password_verify($_POST['pWord'], $login[hash]))
     {
       $login = true;
