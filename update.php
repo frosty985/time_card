@@ -8,7 +8,8 @@ require_once("config.php");
 
 if (isset($_POST["update"])) 
 {
-  // update data base
+  // update database
+  $update_sql = "UPDATE time SET stype = \"$_POST[type]\", stime = \"$_POST[start]\", ftime = \"$_POST[finish]\" WHERE tid = \"$_POST[tid]\"; ";
 }
 
 if (isset($_POST["delete"]))
@@ -18,8 +19,8 @@ if (isset($_POST["delete"]))
 }
 
 mysqli_query($db, $update_sql);
-//echo $update_sql;
+echo $update_sql;
 
-header("Location: index.php");
+//header("Location: index.php");
 
 ?>
