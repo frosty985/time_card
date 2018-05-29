@@ -99,31 +99,32 @@ for ($d = 0; $d < 7; $d++)
   {
     echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"update.php\">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
-    echo "\t\t\t\t\t\t<select name=\"type_$d\">\n";
-    echo "\t\t\t\t\t\t\t<option value=\"Shift\"";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
+    echo "\t\t\t\t\t\t\t<select name=\"type\">\n";
+    echo "\t\t\t\t\t\t\t\t<option value=\"Shift\"";
     if ($day["sType"] == "Shift")
     {
       echo " selected";
     }
     echo ">Shift</option>\n";
-    echo "\t\t\t\t\t\t\t<option value=\"Break\"";
+    echo "\t\t\t\t\t\t\t\t<option value=\"Break\"";
     if ($day["sType"] == "Break")
     {
       echo " selected";
     }
     echo ">Break</option>\n";
-    echo "\t\t\t\t\t\t</select>\n";
-    echo "\t\t\t\t\t</div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time\" value=\"$day[dtime]\"></div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-    echo "\t\t\t\t\t<div class=\"dTableCell\">\n";
-    echo "\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\">\n";
-    echo "\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\">\n";
+    echo "\t\t\t\t\t\t\t</select>\n";
+    echo "\t\t\t\t\t\t</div>\n";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish\" placeholder=\"HH:mm\" value=\"$day[ftime]\"></div>\n";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time\" value=\"$day[dtime]\"></div>\n";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
+    echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
+    echo "\t\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\">\n";
+    echo "\t\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\">\n";
+    echo "\t\t\t\t\t\t</div>\n";
     echo "\t\t\t\t\t</form>\n";
-    echo "\t\t\t\t\t</div>\n";
+    
     echo "\t\t\t\t</div>\n";
 
     echo "\t\t\t\t<div class=\"dTableRow\">\n";
@@ -131,22 +132,22 @@ for ($d = 0; $d < 7; $d++)
 
   }
 
-  echo "\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
-  echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">";
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
-  echo "\t\t\t\t\t\t\t<select name=\"type\">\n";
-  echo "\t\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
-  echo "\t\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
-  echo "\t\t\t\t\t\t\t</select>\n";
-  echo "\t\t\t\t\t\t</div>\n";
+  echo "\t\t\t\t\t\t<form id=\"day_$d\" method=\"post\" action=\"insert.php\">\n";
+  echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
+  echo "\t\t\t\t\t\t\t\t<select name=\"type\">\n";
+  echo "\t\t\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
+  echo "\t\t\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
+  echo "\t\t\t\t\t\t\t\t</select>\n";
+  echo "\t\t\t\t\t\t\t</div>\n";
 
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d\"></div>\n";
-  echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"submit\" name=\"save\" value=\"Save\"></div>\n";
-  echo "\t\t\t\t\t</form>\n";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d\"></div>\n";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"submit\" name=\"save\" value=\"Save\"></div>\n";
+  echo "\t\t\t\t\t\t</form>\n";
 
-  echo "\t\t\t\t</div>";
+  echo "\t\t\t\t\t</div>";
 
 
 }
@@ -158,5 +159,5 @@ echo "$total[total]";
 
 echo "\t\t\t</div\n";
 echo "\t\t</div>\n";
-echo "\t</div\n";
-echo "</div\n";
+echo "\t</div>\n";
+echo "</div>\n";
