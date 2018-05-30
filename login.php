@@ -61,4 +61,5 @@ if ($login)
     <input type="password" name="pWord" required />
     <input type="submit" name="login" value="Log in" />
   </form>
+  <a href="register.php">Register</a>
 </div>
