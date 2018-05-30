@@ -49,7 +49,7 @@ if ($login)
 <div class="login">
   You must be logged in to access this site.
 <?php
-  if (!$login)
+  if ($_POST["login"] && !$login)
   {
     echo "  <span class=\"logFailed\">Something went wrong, please check your username and password</span>\n";
   }
