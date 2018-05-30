@@ -3,18 +3,12 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2018 at 11:03 AM
+-- Generation Time: May 30, 2018 at 05:57 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `time_card`
@@ -31,7 +25,6 @@ USE `time_card`;
 -- Last update: May 26, 2018 at 10:44 AM
 --
 
-DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `cid` char(32) NOT NULL,
   `cname` varchar(255) NOT NULL
@@ -46,13 +39,13 @@ CREATE TABLE `company` (
 --
 -- Table structure for table `pass`
 --
--- Creation: May 26, 2018 at 09:21 AM
+-- Creation: May 29, 2018 at 09:13 PM
+-- Last update: May 30, 2018 at 03:48 PM
 --
 
-DROP TABLE IF EXISTS `pass`;
 CREATE TABLE `pass` (
   `uid` char(32) NOT NULL,
-  `hash` char(64) NOT NULL,
+  `hash` char(60) NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -68,9 +61,9 @@ CREATE TABLE `pass` (
 -- Table structure for table `time`
 --
 -- Creation: May 27, 2018 at 10:00 AM
+-- Last update: May 30, 2018 at 10:29 AM
 --
 
-DROP TABLE IF EXISTS `time`;
 CREATE TABLE `time` (
   `tid` char(32) NOT NULL,
   `uid` char(32) NOT NULL,
@@ -96,10 +89,9 @@ CREATE TABLE `time` (
 -- Table structure for table `user`
 --
 -- Creation: May 26, 2018 at 09:05 AM
--- Last update: May 26, 2018 at 10:46 AM
+-- Last update: May 30, 2018 at 10:40 AM
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `uid` char(32) NOT NULL,
   `uname` varchar(40) NOT NULL,
@@ -110,6 +102,31 @@ CREATE TABLE `user` (
 
 --
 -- RELATIONS FOR TABLE `user`:
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_comp`
+--
+-- Creation: May 30, 2018 at 04:55 PM
+--
+
+CREATE TABLE `user_comp` (
+  `ucid` char(32) NOT NULL,
+  `uid` char(32) NOT NULL,
+  `cid` char(32) NOT NULL,
+  `rate` decimal(5,2) NOT NULL,
+  `edate` date NOT NULL,
+  `udate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS FOR TABLE `user_comp`:
+--   `cid`
+--       `company` -> `cid`
+--   `uid`
+--       `user` -> `uid`
 --
 
 --
@@ -143,6 +160,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`);
 
 --
+-- Indexes for table `user_comp`
+--
+ALTER TABLE `user_comp`
+  ADD PRIMARY KEY (`ucid`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `cid` (`cid`);
+
+--
 -- Constraints for dumped tables
 --
 
@@ -159,6 +184,9 @@ ALTER TABLE `time`
   ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `company` (`cid`) ON UPDATE CASCADE,
   ADD CONSTRAINT `time_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON UPDATE CASCADE;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Constraints for table `user_comp`
+--
+ALTER TABLE `user_comp`
+  ADD CONSTRAINT `user_comp_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `company` (`cid`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_comp_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON UPDATE CASCADE;
