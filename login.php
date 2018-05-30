@@ -8,7 +8,7 @@ $login = false;
 
 if (isset($_POST["login"]))
 {
-  $login_sql = "SELECT user.uid as uid, pass.hash AS hash FROM user JOIN pass ON pass.uid = user.uid WHERE uName = \"". mysqli_real_escape_string($db, $_POST["uName"]) ."\";";
+  $login_sql = "SELECT user.uid as uid, user.fName AS fName, pass.hash AS hash FROM user JOIN pass ON pass.uid = user.uid WHERE uName = \"". mysqli_real_escape_string($db, $_POST["uName"]) ."\";";
   $login_query = mysqli_query($db, $login_sql);
   if ($login_check = mysqli_fetch_array($login_query))
   {
@@ -18,6 +18,7 @@ if (isset($_POST["login"]))
       $hash = password_hash($_POST['pWord'], PASSWORD_DEFAULT);
       mysqli_query($db, "UPDATE pass SET hash='$hash', updated=NOW() WHERE uid='$uid'");
       $_SESSION["uid"] = $login_check["uid"];
+      $_SESSION["fName"] = $login_check["fName"];      
     }
     else
     {
