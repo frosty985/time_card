@@ -1,4 +1,8 @@
 # time_card
 
-A php/mysql web based application to store/record hours worked.
+A php/mysql web based application to store/record hours worked and produce pay before deductions
 
+# To-Do
+* holidays
+* multiple jobs
+* day rate instead aswell as hourly rate
