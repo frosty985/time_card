@@ -24,15 +24,24 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
     if ($_POST != "")
     {
       // check new company does not exist
-      
-      $newComp_sql = "INSERT INTO company (cid, cname) VALUES (REPLACE(UUID(), '-', ''), \"";
-      $newComp_sql .= mysqli_real_escape_string($db, $_POST["oComp"]) . "\") ";";
-      $newComp_query = mysqli_query($db, $newComp_sql);
-      if ($newComp_query)
+      $checkComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) ."\"");
+      if (mysqli_num_rows($checkComp_query) > 0)
       {
-        // get new uuid
-        
+        $checkComp = mysqli_fetch_array($checkComp_query);
+        $cid = $checkComp["cid"];
       }
+      else
+      {
+        $newComp_sql = "INSERT INTO company (cid, cname) VALUES (REPLACE(UUID(), '-', ''), \"";
+        $newComp_sql .= mysqli_real_escape_string($db, $_POST["oComp"]) . "\") ";";
+        $newComp_query = mysqli_query($db, $newComp_sql);
+        if ($newComp_query)
+        {
+          // get new uuid
+          $newComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) ."\"");
+          $newComp = mysqli_fetch_array($checkComp_query);
+          $cid = $newComp["cid"];
+        }
     }
     $comp_sql = "";
   }
