@@ -12,7 +12,7 @@ if (!isset($_SESSION["uid"]))
 }
 
 //if (isset($_POST["comp"]))
-if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
+if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
 {
   echo "POST";
   foreach ($_POST as $key => $value)
@@ -21,10 +21,10 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
   }
   if (isset($_POST["oComp"]))
   {
-    if ($_POST != "")
+    if ($_POST["oComp"] != "")
     {
       // check new company does not exist
-      $checkComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) ."\"");
+      $checkComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) . "\" ; ");
       if (mysqli_num_rows($checkComp_query) > 0)
       {
         $checkComp = mysqli_fetch_array($checkComp_query);
@@ -33,17 +33,41 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
       else
       {
         $newComp_sql = "INSERT INTO company (cid, cname) VALUES (REPLACE(UUID(), '-', ''), \"";
-        $newComp_sql .= mysqli_real_escape_string($db, $_POST["oComp"]) . "\") ";";
+        $newComp_sql .= mysqli_real_escape_string($db, $_POST["oComp"]) . "\") ;";
         $newComp_query = mysqli_query($db, $newComp_sql);
         if ($newComp_query)
         {
           // get new uuid
-          $newComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) ."\"");
-          $newComp = mysqli_fetch_array($checkComp_query);
+          $newComp_query = mysqli_query($db, "SELECT cid FROM company WHERE cname = \"" . mysqli_real_escape_string($db, $_POST["oComp"]) . "\" ;");
+          $newComp = mysqli_fetch_array($newComp_query);
           $cid = $newComp["cid"];
         }
+      }
     }
-    $comp_sql = "";
+    // check varibles
+    if (strlen($_POST["rate"]) <= 5)
+    {
+      $rate = mysqli_real_escape_string($db, $_POST["rate"]);
+    }
+    else
+    {
+      $comp_failed = true;
+    }
+
+    if (strlen($_POST["edate"])  == 10)
+    {
+      $edate = mysqli_real_escape_string($db, $_POST["edate"]);
+    }
+    else
+    {
+      $comp_failed = true;
+    }
+
+    if (!isset($comp_failed))
+    {
+      $comp_sql = "INSERT INTO user_comp (ucid, uid, cid, rate, edate, udate) VALUES (REPLACE(UUID(), '-', ''), \"$_SESSION[uid]\", \"$cid\", \"$rate\", \"$edate\", NOW()) ;";
+      $comp_query = mysqli_query($db, $comp_sql);
+    }
   }
 }
 
@@ -58,11 +82,13 @@ function show_other()
 {
   if (document.getElementById("comp").value == "other")
   {
-    document.getElementById("other").style.display = "block";
+    document.getElementById("oComp").style.display = "block";
+    //document.getElementById("oComp").style.visibility = "visible";
   }
   else
   {
-    document.getElementById("other").style.display = "none";
+    document.getElementById("oComp").style.display = "none";
+    //document.getElementById("oComp").style.visibility = "hidden";
   }
 }
 
@@ -105,14 +131,14 @@ function check_form(frm)
         <option value="other">Other</option>
       </select>
     </span>
-    <span style="display: none" id="other"><input name="oComp" id="oComp" placeholder="Other Company" /></span>
+    <!-- <span style="visibility: hidden" id="other"> --><input name="oComp" id="oComp" placeholder="Other Company" style="display: none" /><!--</span>-->
     <span>
       <label for="rate">Hourly rate:</label>
       <input name="rate" placeholder="£00.00" required />
     </span>
     <span>
-      <label for="eDate">Effective date:</label>
-      <input name="eDate" placeholder="YYYY-MM-DD" required />
+      <label for="edate">Effective date:</label>
+      <input name="edate" placeholder="YYYY-MM-DD" required />
     </span>
     <span>
       <input type="submit" name="save" value="Save" />
