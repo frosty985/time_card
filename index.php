@@ -86,7 +86,22 @@ function valid_form(fInput) {
 
 <div name="page">
   <div name="header">
-    Welcome <?php echo "$user[fname]"; ?>. Current date is <?php echo date("D M jS", $start_date); ?>
+    Welcome <?php echo "$user[fname]"; ?>.<br />
+    <?php
+    $comp_sql = "SELECT cname FROM user_comp JOIN company ON company.cid = user_comp.cid WHERE uid = \"$_SESSION[uid]\" ORDER BY edate DESC LIMIT 1;";
+    $comp_query = mysqli_query($db, $comp_sql);
+    if (mysqli_num_rows($comp_query) != 0)
+    {
+      $comp = mysqli_fetch_array($comp_query);
+      echo "Viewing time card for $comp[cname]<br />\n";
+      echo "<a href=\"company.php\">Adjust company details</a><br />\n";
+    }
+    else
+    {
+      echo "<a href=\"company.php\">Add a company</a><br />\n";
+    }
+    ?>
+    Current date is <?php echo date("D M jS", $start_date); ?><br />
     <nav>
       <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-7, date("Y", $start_date))?>">Back a week</a>
       &nbsp;
