@@ -19,8 +19,23 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
   {
     echo "$key->$value<br />\n";
   }
-  $comp_sql = "";
-
+  if (isset($_POST["oComp"]))
+  {
+    if ($_POST != "")
+    {
+      // check new company does not exist
+      
+      $newComp_sql = "INSERT INTO company (cid, cname) VALUES (REPLACE(UUID(), '-', ''), \"";
+      $newComp_sql .= mysqli_real_escape_string($db, $_POST["oComp"]) . "\") ";";
+      $newComp_query = mysqli_query($db, $newComp_sql);
+      if ($newComp_query)
+      {
+        // get new uuid
+        
+      }
+    }
+    $comp_sql = "";
+  }
 }
 
 if (isset($comp_query))
