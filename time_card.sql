@@ -45,7 +45,7 @@ CREATE TABLE `company` (
 
 CREATE TABLE `pass` (
   `uid` char(32) NOT NULL,
-  `hash` char(60) NOT NULL,
+  `hashd` char(60) NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

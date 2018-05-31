@@ -11,12 +11,16 @@ if (!isset($_SESSION["uid"]))
   exit();
 }
 
-if ($_POST["comp"] && $_POST["rate"] && $_POST["eDate"])
+//if (isset($_POST["comp"]))
+if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["eDate"]))
 {
+  echo "POST";
   foreach ($_POST as $key => $value)
   {
     echo "$key->$value<br />\n";
   }
+  $comp_sql = "";
+
 }
 
 if (isset($comp_query))
@@ -28,14 +32,21 @@ if (isset($comp_query))
 <script>
 function show_other()
 {
-  document.getElementById("other").style.display = "inherit";
+  if (document.getElementById("comp").value == "other")
+  {
+    document.getElementById("other").style.display = "block";
+  }
+  else
+  {
+    document.getElementById("other").style.display = "none";
+  }
 }
 
 function check_form(frm)
 {
   if (document.getElementById("other").style.display != "none")
   {
-    if (document.getElementByName("oComp").value = "")
+    if (document.getElementById("oComp").value = "")
     {
       return false;
     }
@@ -54,24 +65,30 @@ function check_form(frm)
 
 <div class="login">
   <form class="company" action="company.php" method="post" onsubmit="return check_form(this)">
-    <span><?php echo $_SESSION["fName"]; ?>, Please choose your company, and enter your rate of pay.</span>
+    <span><?php echo "$_SESSION[fname]"; ?>, Please choose your company, and enter your rate of pay.</span>
     <span>
       <label for="comp">Company:</label>
-      <select name="comp" onchange="show_other">
+      <select name="comp" id="comp" onchange="show_other()">
         <option>Please select</option>
         <?php
+          $comp_sql = "SELECT cid, cname FROM company ORDER BY cname";
+          $comp_query = mysqli_query($db, $comp_sql);
+          while ($comp = mysqli_fetch_array($comp_query))
+          {
+            echo "<option value=\"$comp[cid]\">$comp[cname]</option>\n;";
+          }
         ?>
         <option value="other">Other</option>
       </select>
     </span>
-    <span style="display: none" id="other"><input name="oComp" placeholder="Other Company" /></span>
+    <span style="display: none" id="other"><input name="oComp" id="oComp" placeholder="Other Company" /></span>
     <span>
       <label for="rate">Hourly rate:</label>
       <input name="rate" placeholder="£00.00" required />
     </span>
     <span>
       <label for="eDate">Effective date:</label>
-      <input name="eDate placeholder="YYYY-MM-DD" required />
+      <input name="eDate" placeholder="YYYY-MM-DD" required />
     </span>
     <span>
       <input type="submit" name="save" value="Save" />
