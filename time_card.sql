@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 30, 2018 at 05:57 PM
+-- Generation Time: Jun 04, 2018 at 10:40 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -22,9 +22,10 @@ USE `time_card`;
 -- Table structure for table `company`
 --
 -- Creation: May 26, 2018 at 09:09 AM
--- Last update: May 26, 2018 at 10:44 AM
+-- Last update: May 31, 2018 at 06:56 PM
 --
 
+DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `cid` char(32) NOT NULL,
   `cname` varchar(255) NOT NULL
@@ -39,10 +40,11 @@ CREATE TABLE `company` (
 --
 -- Table structure for table `pass`
 --
--- Creation: May 29, 2018 at 09:13 PM
--- Last update: May 30, 2018 at 03:48 PM
+-- Creation: May 30, 2018 at 07:44 PM
+-- Last update: Jun 04, 2018 at 07:00 PM
 --
 
+DROP TABLE IF EXISTS `pass`;
 CREATE TABLE `pass` (
   `uid` char(32) NOT NULL,
   `hashd` char(60) NOT NULL,
@@ -60,18 +62,18 @@ CREATE TABLE `pass` (
 --
 -- Table structure for table `time`
 --
--- Creation: May 27, 2018 at 10:00 AM
--- Last update: May 30, 2018 at 10:29 AM
+-- Creation: Jun 04, 2018 at 09:39 PM
 --
 
+DROP TABLE IF EXISTS `time`;
 CREATE TABLE `time` (
   `tid` char(32) NOT NULL,
   `uid` char(32) NOT NULL,
   `cid` char(32) NOT NULL,
-  `sType` set('Shift','Break') NOT NULL,
+  `sType` set('Shift','Break','Holiday','Bank Holiday') NOT NULL,
   `tdate` date NOT NULL,
-  `stime` time NOT NULL,
-  `ftime` time NOT NULL,
+  `stime` time DEFAULT NULL,
+  `ftime` time DEFAULT NULL,
   `utime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -86,12 +88,38 @@ CREATE TABLE `time` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `todo`
+--
+-- Creation: Jun 04, 2018 at 08:26 PM
+--
+
+DROP TABLE IF EXISTS `todo`;
+CREATE TABLE `todo` (
+  `tid` char(32) NOT NULL,
+  `uid` char(32) NOT NULL,
+  `date` date NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `priority` int(2) UNSIGNED ZEROFILL NOT NULL,
+  `completed` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS FOR TABLE `todo`:
+--   `uid`
+--       `user` -> `uid`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 -- Creation: May 26, 2018 at 09:05 AM
--- Last update: May 30, 2018 at 10:40 AM
+-- Last update: May 30, 2018 at 07:48 PM
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `uid` char(32) NOT NULL,
   `uname` varchar(40) NOT NULL,
@@ -110,8 +138,10 @@ CREATE TABLE `user` (
 -- Table structure for table `user_comp`
 --
 -- Creation: May 30, 2018 at 04:55 PM
+-- Last update: Jun 04, 2018 at 09:10 PM
 --
 
+DROP TABLE IF EXISTS `user_comp`;
 CREATE TABLE `user_comp` (
   `ucid` char(32) NOT NULL,
   `uid` char(32) NOT NULL,
@@ -154,6 +184,13 @@ ALTER TABLE `time`
   ADD KEY `cid` (`cid`);
 
 --
+-- Indexes for table `todo`
+--
+ALTER TABLE `todo`
+  ADD PRIMARY KEY (`tid`),
+  ADD KEY `uid` (`uid`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -183,6 +220,12 @@ ALTER TABLE `pass`
 ALTER TABLE `time`
   ADD CONSTRAINT `time_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `company` (`cid`) ON UPDATE CASCADE,
   ADD CONSTRAINT `time_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `todo`
+--
+ALTER TABLE `todo`
+  ADD CONSTRAINT `todo_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_comp`
