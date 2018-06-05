@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2018 at 10:40 PM
+-- Generation Time: Jun 05, 2018 at 10:15 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -31,17 +31,13 @@ CREATE TABLE `company` (
   `cname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELATIONS FOR TABLE `company`:
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `pass`
 --
 -- Creation: May 30, 2018 at 07:44 PM
--- Last update: Jun 04, 2018 at 07:00 PM
+-- Last update: Jun 05, 2018 at 08:43 PM
 --
 
 DROP TABLE IF EXISTS `pass`;
@@ -51,18 +47,13 @@ CREATE TABLE `pass` (
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELATIONS FOR TABLE `pass`:
---   `uid`
---       `user` -> `uid`
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `time`
 --
 -- Creation: Jun 04, 2018 at 09:39 PM
+-- Last update: Jun 05, 2018 at 04:14 PM
 --
 
 DROP TABLE IF EXISTS `time`;
@@ -77,20 +68,13 @@ CREATE TABLE `time` (
   `utime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELATIONS FOR TABLE `time`:
---   `cid`
---       `company` -> `cid`
---   `uid`
---       `user` -> `uid`
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `todo`
 --
 -- Creation: Jun 04, 2018 at 08:26 PM
+-- Last update: Jun 05, 2018 at 04:15 PM
 --
 
 DROP TABLE IF EXISTS `todo`;
@@ -103,12 +87,6 @@ CREATE TABLE `todo` (
   `priority` int(2) UNSIGNED ZEROFILL NOT NULL,
   `completed` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `todo`:
---   `uid`
---       `user` -> `uid`
---
 
 -- --------------------------------------------------------
 
@@ -128,17 +106,12 @@ CREATE TABLE `user` (
   `lacdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELATIONS FOR TABLE `user`:
---
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `user_comp`
 --
--- Creation: May 30, 2018 at 04:55 PM
--- Last update: Jun 04, 2018 at 09:10 PM
+-- Creation: Jun 05, 2018 at 09:08 PM
 --
 
 DROP TABLE IF EXISTS `user_comp`;
@@ -148,16 +121,10 @@ CREATE TABLE `user_comp` (
   `cid` char(32) NOT NULL,
   `rate` decimal(5,2) NOT NULL,
   `edate` date NOT NULL,
-  `udate` datetime NOT NULL
+  `udate` datetime NOT NULL,
+  `ptype` set('week','2week','4week','month') DEFAULT NULL,
+  `pdate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELATIONS FOR TABLE `user_comp`:
---   `cid`
---       `company` -> `cid`
---   `uid`
---       `user` -> `uid`
---
 
 --
 -- Indexes for dumped tables
