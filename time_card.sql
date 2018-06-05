@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2018 at 10:15 PM
+-- Generation Time: Jun 05, 2018 at 10:18 PM
 -- Server version: 5.7.22-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -31,6 +31,10 @@ CREATE TABLE `company` (
   `cname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS FOR TABLE `company`:
+--
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +50,12 @@ CREATE TABLE `pass` (
   `hashd` char(60) NOT NULL,
   `updated` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS FOR TABLE `pass`:
+--   `uid`
+--       `user` -> `uid`
+--
 
 -- --------------------------------------------------------
 
@@ -68,6 +78,14 @@ CREATE TABLE `time` (
   `utime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS FOR TABLE `time`:
+--   `cid`
+--       `company` -> `cid`
+--   `uid`
+--       `user` -> `uid`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +106,12 @@ CREATE TABLE `todo` (
   `completed` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS FOR TABLE `todo`:
+--   `uid`
+--       `user` -> `uid`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +129,10 @@ CREATE TABLE `user` (
   `lname` varchar(30) NOT NULL,
   `lacdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS FOR TABLE `user`:
+--
 
 -- --------------------------------------------------------
 
@@ -125,6 +153,14 @@ CREATE TABLE `user_comp` (
   `ptype` set('week','2week','4week','month') DEFAULT NULL,
   `pdate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS FOR TABLE `user_comp`:
+--   `cid`
+--       `company` -> `cid`
+--   `uid`
+--       `user` -> `uid`
+--
 
 --
 -- Indexes for dumped tables
