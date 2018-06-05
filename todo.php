@@ -62,7 +62,7 @@ else
 	echo "\t\t</tr>\n";
 
 
-	$todo_sql = "SELECT title, description, uname, date, priority FROM todo JOIN user on user.uid = todo.uid ORDER BY priority, date";
+	$todo_sql = "SELECT title, description, uname, date, priority, completed FROM todo JOIN user on user.uid = todo.uid ORDER BY priority, date";
 	$todo_query = mysqli_query($db, $todo_sql);
 
 	if ($todo_query)
@@ -77,11 +77,60 @@ else
 			{
 				echo "\t\t<tr>\n";
 
-				echo "\t\t\t<td>$todo_row[title]</td>\n";
-				echo "\t\t\t<td>$todo_row[description]</td>\n";
-				echo "\t\t\t<td>$todo_row[uname]</td>\n";
-				echo "\t\t\t<td>$todo_row[date]</td>\n";
-				echo "\t\t\t<td>$todo_row[priority]</td\n";
+				echo "\t\t\t<td>";
+				if (isset($todo_row["completed"]))
+				{
+					echo "<strike>";
+				}
+				echo "$todo_row[title]";
+				if (isset($todo_row["completed"]))
+				{
+					echo "</strike>";
+				}
+				echo "</td>\n";
+				
+				echo "\t\t\t<td>";
+				if (isset($todo_row["completed"]))
+				{
+					echo "<strike>";
+				}
+				echo str_replace("\n", "<br />", $todo_row["description"]);
+				if (isset($todo_row["completed"]))
+				{
+					echo "</strike>";
+				}
+				echo "</td>\n";
+				echo "\t\t\t<td>";
+				
+				if (isset($todo_row["completed"]))
+				{
+					echo "<strike>";
+				}
+				echo "$todo_row[uname]";
+				if (isset($todo_row["completed"]))
+				{
+					echo "</strike>";
+				}
+				echo "</td>\n";
+				echo "\t\t\t<td>";
+				
+				if (isset($todo_row["completed"]))
+				{
+					echo "<strike>";
+				}
+				echo "$todo_row[date]";
+				if (isset($todo_row["completed"]))
+				{
+					echo "</strike>";
+				}
+				echo "</td>\n";
+				echo "\t\t\t<td>";
+				
+				if (isset($todo_row["completed"]))
+				{
+					echo "<strike>";
+				}
+				echo "$todo_row[priority]</td>\n";
 
 				echo "\t</tr>\n";
 			}
