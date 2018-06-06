@@ -21,6 +21,11 @@ if (isset($_POST["delete"]))
 mysqli_query($db, $update_sql);
 //echo $update_sql;
 
-header("Location: index.php");
+$ref = "index.php";
+if (isset($_GET["start_date"]))
+{
+  $ref .= "?start_date=$_GET[start_date]";
+}
+header("location: $ref");
 
 ?>
