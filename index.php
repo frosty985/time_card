@@ -49,7 +49,7 @@ function calc_time(input) {
 function valid_time(input)
 {
   re = /^(\d{1,2}):(\d{2})/;
-  if (input.value != "" && )
+  if (input.value != "")
   {
     if (regs = input.value.match(re))
     {
