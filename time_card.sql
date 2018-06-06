@@ -68,7 +68,7 @@ CREATE TABLE `time` (
   `tid` char(32) NOT NULL,
   `uid` char(32) NOT NULL,
   `cid` char(32) NOT NULL,
-  `sType` set('Shift','Break') NOT NULL,
+  `sType` set('Shift','Break','Holiday','Bank Holiday') NOT NULL,
   `tdate` date NOT NULL,
   `stime` time NOT NULL,
   `ftime` time NOT NULL,
