@@ -151,7 +151,7 @@ function check_form(frm)
     </span>
     <span>
 	  <label for="paytype">Pay Type</label>
-	  <select name="paytype">
+	  <select name="ptype">
 	    <option value="week">Weekly</option>
 	    <option value="2week">Bi-Weekly</option>
 	    <option value="4week">4-Weekly</option>
