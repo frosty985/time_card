@@ -16,6 +16,11 @@ if (isset($_POST["save"]))
 
 }
 
-header('location: index.php');
+$ref = "index.php";
+if (isset($_GET["start_date"]))
+{
+  $ref .= "?start_date=$_GET[start_date]";
+}
+header("location: $ref");
 
 ?>
