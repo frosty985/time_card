@@ -72,9 +72,19 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
       $comp_failed = true;
     }
     
+    if (isset($_POST["cdays"])
+    {
+		$cdays = $_POST["cdays"];
+	}
+	else
+    {
+      $comp_failed = true;
+    }
+    
+    
     if (!isset($comp_failed))
     {
-      $comp_sql = "INSERT INTO user_comp (ucid, uid, cid, rate, edate, udate, ptype, pdate) VALUES (REPLACE(UUID(), '-', ''), \"$_SESSION[uid]\", \"$cid\", \"$rate\", \"$edate\", NOW(), \"$_POST[ptype]\", \"$pdate\") ;";
+      $comp_sql = "INSERT INTO user_comp (ucid, uid, cid, rate, edate, udate, ptype, pdate, cdate) VALUES (REPLACE(UUID(), '-', ''), \"$_SESSION[uid]\", \"$cid\", \"$rate\", \"$edate\", NOW(), \"$_POST[ptype]\", \"$pdate\", \"$cdays\") ;";
       $comp_query = mysqli_query($db, $comp_sql);
     }
   }
@@ -161,6 +171,9 @@ function check_form(frm)
       <label for="pdate">First pay date:</label>
       <input name="pdate" placeholder="YYYY-MM-DD" required />
     </span>
+	<span>
+      <label for="cdays">Pay cut off (days before paydate)</label>
+      <input name="cdays" palceholder="0" required />
 	</span>
     <span>
       <input type="submit" name="save" value="Save" />
