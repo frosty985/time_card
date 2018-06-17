@@ -55,7 +55,7 @@ if ($login)
     echo "  <span class=\"logFailed\">Something went wrong, please check your username and password</span>\n";
   }
 ?>
-  <form class="fLogin" action="login.php" method="post">
+  <form class="fLogin" action="login.php<?php if (isset($_GET["ref"])) { echo "?ref=$_GET[ref]"; } ?>" method="post">
     <label for="uname">User Name:</label>
     <input name="uname" placeholder="Username" required />
     <label for="pWord">Password:</label>
