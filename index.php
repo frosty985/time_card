@@ -235,7 +235,7 @@ for ($d = 0; $d < 7; $d++)
 }
 //SELECT SUM(total) as total, SUM(rate) as rate FROM (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), "%H:%i") AS "total", ROUND(sum((TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))/60/60)*rate,2) AS rate FROM `time` JOIN user_comp on user_comp.uid = time.uid WHERE time.uid='0a25bf3160d211e899675254004146e6' AND time.cid='a406ab1860d111e899675254004146e6' AND tdate >= "2018-05-27" AND tdate <= "2018-06-03" GROUP BY sType, stime, ftime, rate) AS maths
 
-$total_sql = " SELECT SUM(total) as total, SUM(rate) as rate FROM ";
+$total_sql = " SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(total))), \"%H:%i\") as total, SUM(rate) as rate FROM ";
 $total_sql .= " (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\", ";
 $total_sql .= " ROUND(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime)))/60/60)*rate,2) AS \"rate\" ";
 $total_sql .= " FROM `time` ";
