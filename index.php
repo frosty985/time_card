@@ -74,42 +74,26 @@ function valid_time(input)
 }
 
 function valid_form(fInput) {
-  if (!valid_time(fInput.start)) return false;
-  if (!valid_time(fInput.finish)) return false;
-  return true;
-
+  if (fInput.type.value != "Holiday" || fInput.type.value != "Bank Holiday")
+  {
+	if (!valid_time(fInput.start)) return false;
+	if (!valid_time(fInput.finish)) return false;
+	return true;
+  }
 }
 
 
 </script>
+<?php require_once("nav.php"); ?>
 
-
-<div name="page">
-  <div name="header">
-    Welcome <?php echo "$user[fname]"; ?>.<br />
-    <?php
-    $comp_sql = "SELECT cname FROM user_comp JOIN company ON company.cid = user_comp.cid WHERE uid = \"$_SESSION[uid]\" ORDER BY edate DESC LIMIT 1;";
-    $comp_query = mysqli_query($db, $comp_sql);
-    if (mysqli_num_rows($comp_query) != 0)
-    {
-      $comp = mysqli_fetch_array($comp_query);
-      echo "Viewing time card for $comp[cname]<br />\n";
-      echo "<a href=\"company.php\">Adjust company details</a><br />\n";
-    }
-    else
-    {
-      echo "<a href=\"company.php\">Add a company</a><br />\n";
-    }
-    ?>
-    Current date is <?php echo date("D M jS", $start_date); ?><br />
+  <div name="dbody">
     <nav>
+    Current date is <?php echo date("D M jS", $start_date); ?><br />
+    
       <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-7, date("Y", $start_date))?>">Back a week</a>
       &nbsp;
       <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7, date("Y", $start_date))?>">Forward a week</a>
     </nav>
-  </div>
-
-  <div name="dbody">
 <?php
 /// create a table of week
 /// week start day Sunday
@@ -154,7 +138,12 @@ for ($d = 0; $d < 7; $d++)
   while ($day = mysqli_fetch_array($day_query))
   {
     echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php\" onsubmit=\"return valid_form(this)\">\n";
+    echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php";
+    if (isset($_GET["start_date"]))
+	{
+	  echo "?start_date=$_GET[start_date]";
+	}
+	echo "\" onsubmit=\"return valid_form(this)\">\n";
     echo "\t\t\t\t\t\t<input type=\"hidden\" name=\"tid\" value=\"$day[tid]\" />\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
@@ -171,6 +160,18 @@ for ($d = 0; $d < 7; $d++)
       echo " selected";
     }
     echo ">Break</option>\n";
+    echo "\t\t\t\t\t\t\t\t<option value=\"Holiday\"";
+    if ($day["sType"] == "Holiday")
+    {
+      echo " selected";
+    }
+    echo ">Holiday</option>\n";
+      echo "\t\t\t\t\t\t\t\t<option value=\"Bank Holiday\"";
+    if ($day["sType"] == "Bank Holiday")
+    {
+      echo " selected";
+    }
+    echo ">Bank Holiday</option>\n";
     echo "\t\t\t\t\t\t\t</select>\n";
     echo "\t\t\t\t\t\t</div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start\" placeeholder=\"HH:mm\" value=\"$day[stime]\"></div>\n";
@@ -188,13 +189,20 @@ for ($d = 0; $d < 7; $d++)
 
   echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
   //echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php\" onsubmit=\"return valid_form(this)\">\n";
+  echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php";
+  if (isset($_GET["start_date"]))
+  {
+	  echo "?start_date=$_GET[start_date]";
+  }
+  echo "\" onsubmit=\"return valid_form(this)\">\n";
   echo "\t\t\t\t\t\t\t<input type=\"hidden\" name=\"tdate\" value=\"". date("Y-m-d", $mkd) . "\">\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">" . date("l", $mkd) . "</div>\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\">\n";
   echo "\t\t\t\t\t\t\t\t<select name=\"type\">\n";
   echo "\t\t\t\t\t\t\t\t\t<option value=\"Shift\">Shift</option>\n";
   echo "\t\t\t\t\t\t\t\t\t<option value=\"Break\">Break</option>\n";
+  echo "\t\t\t\t\t\t\t\t\t<option value=\"Holiday\">Holiday</option>\n";
+  echo "\t\t\t\t\t\t\t\t\t<option value=\"Bank Holiday\">Bank Holiday</option>\n";
   echo "\t\t\t\t\t\t\t\t</select>\n";
   echo "\t\t\t\t\t\t\t</div>\n";
 
@@ -206,26 +214,30 @@ for ($d = 0; $d < 7; $d++)
 
   echo "\t\t\t\t\t</div>";
 
-
 }
+//SELECT SUM(total) as total, SUM(rate) as rate FROM (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), "%H:%i") AS "total", ROUND(sum((TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))/60/60)*rate,2) AS rate FROM `time` JOIN user_comp on user_comp.uid = time.uid WHERE time.uid='0a25bf3160d211e899675254004146e6' AND time.cid='a406ab1860d111e899675254004146e6' AND tdate >= "2018-05-27" AND tdate <= "2018-06-03" GROUP BY sType, stime, ftime, rate) AS maths
 
-echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
-echo "\t\t\t\t<div class=\"dTableRow\">\n";
-echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
-echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Total:</div>\n";
-$total_sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\" ";
+$total_sql = " SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(total))), \"%H:%i\") as total, SUM(rate) as rate FROM ";
+$total_sql .= " (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\", ";
+$total_sql .= " ROUND(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime)))/60/60)*rate,2) AS \"rate\" ";
 $total_sql .= " FROM `time` ";
-$total_sql .= " WHERE uid='$uid' AND cid='$cid' AND tdate >= \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-date("w", $start_date), date("Y", $start_date))) . "\" ";
-$total_sql .= " AND tdate <= \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7-date("w", $start_date), date("Y", $start_date))) . "\"; ";
+$total_sql .= " JOIN user_comp on user_comp.uid = time.uid ";
+$total_sql .= " WHERE time.uid='$uid' AND time.cid='$cid' AND tdate >= \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-date("w", $start_date), date("Y", $start_date))) . "\" ";
+$total_sql .= " AND tdate <= \"" . date("Y-m-d", mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7-date("w", $start_date), date("Y", $start_date))) . "\" ";
+$total_sql .= " GROUP BY rate, sType, stime, ftime) as maths ;";
 
 //echo $total_sql;
 $total_query = mysqli_query($db, $total_sql);
 $total = mysqli_fetch_array($total_query);
 
+echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
+echo "\t\t\t\t<div class=\"dTableRow\">\n";
+echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Total:</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">$total[total]</div>\n";
-
+echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Pay:</div>\n";
+echo "\t\t\t\t\t<div class=\"dTableCell\">£ $total[rate]</div>\n";
 echo "\t\t\t</div\n";
 echo "\t\t</div>\n";
 echo "\t</div>\n";
