@@ -2,8 +2,9 @@
 
 require_once("config.php");
 require_once("header.php");
-
 session_start();
+
+require_once("nav.php");
 
 if (!isset($_SESSION["uid"]))
 {
@@ -13,6 +14,7 @@ if (!isset($_SESSION["uid"]))
 
 $monday = strtotime('last monnday',strtotime('tomorrow'));
 
+echo "  <div name=\"dbody\">\n";
 echo "Pay Period";
 echo "<br />";
 
@@ -43,9 +45,9 @@ if ($pay_info["ptype"] == "month")
 			// cut off 
 			if (isset($lastpaydate))
 			{
-				$cutoffdates = date("Y-m-d", strtotime('this week', mktime(0, 0, 0, date("m", $lastpaydate)+1, date("d", $lastpaydate), date("Y", $lastpaydate))));
+				$cutoffdates = date("Y-m-d", strtotime('this week', mktime(0, 0, 0, date("m", $lastpaydate), date("d", $lastpaydate), date("Y", $lastpaydate))));
 			}
-			$cutoffdatee =  date("Y-m-d", strtotime('this week', mktime(0, 0, 0, date("m", $nextpaydate)+1, date("d", $nextpaydate), date("Y", $nextpaydate))));
+			$cutoffdatee =  date("Y-m-d", strtotime('this week', mktime(0, 0, 0, date("m", $nextpaydate), date("d", $nextpaydate), date("Y", $nextpaydate))));
 			
 			$total_sql = " SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(total))), \"%H:%i\") as total, SUM(rate) as rate FROM ";
 			$total_sql .= " (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), \"%H:%i\") AS \"total\", ";
@@ -55,11 +57,14 @@ if ($pay_info["ptype"] == "month")
 			$total_sql .= " WHERE time.uid='$uid' AND time.cid='$cid' AND tdate >= \"$cutoffdates\" ";
 			$total_sql .= " AND tdate <= \"$cutoffdatee\" ";
 			$total_sql .= " GROUP BY rate, sType, stime, ftime) as maths ;";
-
+			
+			
+			
 			$total_query = mysqli_query($db, $total_sql);
 			$total = mysqli_fetch_array($total_query);
 
 			echo " $total[total] - £$total[rate]";
+			
 			echo "<br />";
 		}
 		// create next pay date

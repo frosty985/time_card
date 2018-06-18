@@ -16,3 +16,4 @@ $user = mysqli_fetch_array($user_query);
   </head>
 
   <body>
+<div name="page">
