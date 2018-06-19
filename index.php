@@ -88,11 +88,17 @@ function valid_form(fInput) {
 
   <div name="dbody">
     <nav>
-    Current date is <?php echo date("D M jS", $start_date); ?><br />
-    
-      <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-7, date("Y", $start_date))?>">Back a week</a>
-      &nbsp;
-      <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7, date("Y", $start_date))?>">Forward a week</a>
+	  <span>
+	    Current week is
+	    <?php echo date("D jS M 'y", mktime(0, 0, 0, date("m"), date("d", $start_date) - date("w", $start_date), date("Y", $start_date))); ?>
+        &nbsp;&ndash;&nbsp;
+        <?php echo date("D jS M 'y", mktime(0, 0, 0, date("m"), date("d", $start_date) + 6 - date("w", $start_date), date("Y", $start_date))); ?>
+      <!--</span>
+      <span>-->
+		<a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-7, date("Y", $start_date))?>" class="button button-tiny button-primary">Back a week</a>
+        &nbsp;
+        <a href="?start_date=<?php echo mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+7, date("Y", $start_date))?>" class="button button-tiny button-primary">Forward a week</a>
+      </span>
     </nav>
 <?php
 /// create a table of week
@@ -113,7 +119,7 @@ echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Start</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Finish</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Time</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableHeadCell\">Action</div>\n";
-
+echo "\t\t\t\t\t<div class=\"dTableHeadCell\">&nbsp;</div>\n";
 echo "\t\t\t\t</div>\n";
 
 for ($d = 0; $d < 7; $d++)
@@ -137,7 +143,7 @@ for ($d = 0; $d < 7; $d++)
   $day_query = mysqli_query($db, $day_sql);
   while ($day = mysqli_fetch_array($day_query))
   {
-    echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
+    //echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
     echo "\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"update.php";
     if (isset($_GET["start_date"]))
 	{
@@ -179,15 +185,15 @@ for ($d = 0; $d < 7; $d++)
     echo "\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time\" value=\"$day[dtime]\"></div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
     echo "\t\t\t\t\t\t<div class=\"dTableCell\">\n";
-    echo "\t\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\">\n";
-    echo "\t\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\">\n";
+    echo "\t\t\t\t\t\t\t<input type=\"submit\" name=\"update\" value=\"Update\" class=\"button button-tiny button-primary\">\n";
+    echo "\t\t\t\t\t\t\t<input type=\"Submit\" name=\"delete\" value=\"Delete\" class=\"button button-tiny button-primary\">\n";
     echo "\t\t\t\t\t\t</div>\n";
     echo "\t\t\t\t\t</form>\n";
     
-    echo "\t\t\t\t</div>\n";
+    //echo "\t\t\t\t</div>\n";
   }
 
-  echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
+  //echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
   //echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
   echo "\t\t\t\t\t\t<form class=\"dTableRow\" id=\"day_$d\" method=\"post\" action=\"insert.php";
   if (isset($_GET["start_date"]))
@@ -209,10 +215,11 @@ for ($d = 0; $d < 7; $d++)
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"start\" id=\"start_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"finish\" id=\"finish_$d\" placeholder=\"HH:mm\" onchange=\"calc_time(this)\"></div>\n";
   echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input name=\"time\" id=\"time_$d\"></div>\n";
-  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"submit\" name=\"save\" value=\"Save\"></div>\n";
+  echo "\t\t\t\t\t\t\t<div class=\"dTableCell\"><input type=\"submit\" name=\"save\" value=\"Save\" class=\"button button-tiny button-primary\"></div>\n";
+  echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
   echo "\t\t\t\t\t\t</form>\n";
 
-  echo "\t\t\t\t\t</div>";
+  //echo "\t\t\t\t\t</div>";
 
 }
 //SELECT SUM(total) as total, SUM(rate) as rate FROM (SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))), "%H:%i") AS "total", ROUND(sum((TIME_TO_SEC(IF(sType="Break",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime))))/60/60)*rate,2) AS rate FROM `time` JOIN user_comp on user_comp.uid = time.uid WHERE time.uid='0a25bf3160d211e899675254004146e6' AND time.cid='a406ab1860d111e899675254004146e6' AND tdate >= "2018-05-27" AND tdate <= "2018-06-03" GROUP BY sType, stime, ftime, rate) AS maths
@@ -230,7 +237,7 @@ $total_sql .= " GROUP BY rate, sType, stime, ftime) as maths ;";
 $total_query = mysqli_query($db, $total_sql);
 $total = mysqli_fetch_array($total_query);
 
-echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
+//echo "\t\t\t\t<div class=\"dTableRowGroup\">\n";
 echo "\t\t\t\t<div class=\"dTableRow\">\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
@@ -238,7 +245,9 @@ echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Total:</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">$total[total]</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">Weekly Pay:</div>\n";
 echo "\t\t\t\t\t<div class=\"dTableCell\">£ $total[rate]</div>\n";
-echo "\t\t\t</div\n";
+echo "\t\t\t\t\t<div class=\"dTableCell\">&nbsp;</div>\n";
+
+//echo "\t\t\t</div\n";
 echo "\t\t</div>\n";
 echo "\t</div>\n";
 echo "</div>\n";

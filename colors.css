@@ -1,0 +1,38 @@
+.login {
+  background: black;
+  color: white;
+}
+
+.button-primary {
+  background: slategrey;
+  color: white;
+}
+
+.button-primary:hover {
+  background: lightslategrey;
+  color: white;
+}
+
+.dTableRow, .dTableHeadRow {
+  background: grey;
+}
+
+.dTableRow:nth-child(even) {
+  background: lightgrey;
+}
+
+.header{
+  background: lightgrey;
+}
+
+nav {
+  color: white;
+}
+
+nav h3 {
+  color: darkgrey;
+}
+
+nav span {
+	color: black;
+}

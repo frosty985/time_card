@@ -47,7 +47,7 @@ if ($login)
 
 ?>
 
-<div class="login">
+<div class="login center">
   You must be logged in to access this site.
 <?php
   if (isset($_POST["login"]) && !$login)
