@@ -1,0 +1,18 @@
+.button-tiny
+{
+  font-size: 12px;
+}
+
+.button-medium
+{
+  font-size: 16px;
+}
+
+.button-large
+{
+  font-size: 20px;
+}
+
+.dTableHeadRow {
+  font-weight: bold;
+}
