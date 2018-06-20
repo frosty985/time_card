@@ -7,7 +7,7 @@ session_start();
 
 if (!isset($_SESSION["uid"]))
 {
-  header("Location: login.php?ref=company.php");
+  header("Location: login.php?ref=register.php");
   exit();
 }
 
@@ -72,28 +72,34 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
       $comp_failed = true;
     }
     
-    if (isset($_POST["cdays"])
-    {
-		$cdays = $_POST["cdays"];
-	}
-	else
-    {
-      $comp_failed = true;
+    if (isset($_POST["cdays"])) {
+      if (strlen($_POST["cdays"]) <= 2) {
+        $cdays = $_POST["cdays"];
+      }
+      else { $comp_failed = true; }
     }
+    else { $comp_failed = true; }
     
+    if (isset($_POST["sweek"])) {
+      if (strlen($_POST["sweek"]) <= 2) {
+        $sweek = $_POST["sweek"];
+      }
+      else
+      {
+        $comp_failed = true;
+      }
+    }
+    else { $comp_failed = true; }
     
-    if (!isset($comp_failed))
-    {
-      $comp_sql = "INSERT INTO user_comp (ucid, uid, cid, rate, edate, udate, ptype, pdate, cdate) VALUES (REPLACE(UUID(), '-', ''), \"$_SESSION[uid]\", \"$cid\", \"$rate\", \"$edate\", NOW(), \"$_POST[ptype]\", \"$pdate\", \"$cdays\") ;";
+    if (!isset($comp_failed)) {
+      $comp_sql = "INSERT INTO user_comp (ucid, uid, cid, rate, edate, udate, ptype, pdate, cdate, sweek) ";
+      $comp_sql .= " VALUES (REPLACE(UUID(), '-', ''), \"$_SESSION[uid]\", \"$cid\", \"$rate\", \"$edate\", NOW(), \"$_POST[ptype]\", \"$pdate\", \"$cdays\", \"$sweek\") ;";
       $comp_query = mysqli_query($db, $comp_sql);
     }
   }
 }
 
-if (isset($comp_query))
-{
-  header("Location: index.php");
-}
+if (isset($comp_query)) { header("Location: index.php"); }
 
 ?>
 <script>
@@ -134,49 +140,100 @@ function check_form(frm)
 
 <div class="login">
   <form class="company" action="company.php" method="post" onsubmit="return check_form(this)">
-    <span><?php echo "$_SESSION[fname]"; ?>, Please choose your company, and enter your rate of pay.</span>
-    <span>
-      <label for="comp">Company:</label>
-      <select name="comp" id="comp" onchange="show_other()">
-        <option>Please select</option>
-        <?php
-          $comp_sql = "SELECT cid, cname FROM company ORDER BY cname";
-          $comp_query = mysqli_query($db, $comp_sql);
-          while ($comp = mysqli_fetch_array($comp_query))
-          {
-            echo "<option value=\"$comp[cid]\">$comp[cname]</option>\n;";
-          }
-        ?>
-        <option value="other">Other</option>
-      </select>
-    </span>
-    <!-- <span style="visibility: hidden" id="other"> --><input name="oComp" id="oComp" placeholder="Other Company" style="display: none" /><!--</span>-->
-    <span>
-      <label for="rate">Hourly rate:</label>
-      <input name="rate" placeholder="£00.00" required />
-    </span>
-    <span>
-      <label for="edate">Effective date:</label>
-      <input name="edate" placeholder="YYYY-MM-DD" required />
-    </span>
-    <span>
-	  <label for="paytype">Pay Type</label>
-	  <select name="ptype">
-	    <option value="week">Weekly</option>
-	    <option value="2week">Bi-Weekly</option>
-	    <option value="4week">4-Weekly</option>
-	    <option value="month">Monthly</option>
-	  </select>
-    <span>
-      <label for="pdate">First pay date:</label>
-      <input name="pdate" placeholder="YYYY-MM-DD" required />
-    </span>
-	<span>
-      <label for="cdays">Pay cut off (days before paydate)</label>
-      <input name="cdays" palceholder="0" required />
-	</span>
-    <span>
-      <input type="submit" name="save" value="Save" />
-    </span>
+    <div class="dTable">
+      <div class="dTableRow">
+        <div class="dTableCell" style="width: 100%">
+          <span><?php echo "$_SESSION[fname]"; ?>, Please choose your company, and enter your rate of pay.</span>
+        </div>
+      </div>
+    
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <span>
+            <label for="comp">Company:</label>
+            <select name="comp" id="comp" onchange="show_other()">
+              <option>Please select</option>
+              <?php
+              $comp_sql = "SELECT cid, cname FROM company ORDER BY cname";
+              $comp_query = mysqli_query($db, $comp_sql);
+              while ($comp = mysqli_fetch_array($comp_query))
+              {
+              echo "<option value=\"$comp[cid]\">$comp[cname]</option>\n;";
+              }
+                    ?>
+              <option value="other">Other</option>
+            </select>
+          </span>
+        </div>
+        <div class="dTableCell">
+          <input name="oComp" id="oComp" placeholder="Other Company" style="display: none" />
+        </div>
+      </div>
+
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <span>
+          <label for="rate">Hourly rate:</label>
+            <input name="rate" placeholder="£00.00" required />
+          </span>
+        </div>
+        <div class="dTableCell">
+              <span>
+            <label for="edate">Effective date:</label>
+            <input name="edate" placeholder="YYYY-MM-DD" required />
+          </span>
+        </div>
+      </div>
+
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <span>
+            <label for="paytype">Pay Type</label>
+            <select name="ptype">
+              <option value="week">Weekly</option>
+              <option value="2week">Bi-Weekly</option>
+              <option value="4week">4-Weekly</option>
+              <option value="month">Monthly</option>
+            </select>
+          </span>
+        </div>
+        <div class="dTableCell">
+          <span>
+            <label for="pdate">First pay date:</label>
+            <input name="pdate" placeholder="YYYY-MM-DD" required />
+          </span>
+        </div>
+      </div>
+
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <span>
+            <label for="cdays">Pay cut off (days before paydate)</label>
+            <input name="cdays" palceholder="0" required />
+          </span>
+        </div>
+        <div class="dTableCell">
+          <label for="sweek">First day of the week</label>
+          <select name="sweek">
+            <option value="-1">Sunday</option>
+            <option value="0">Monday</option>
+            <option value="1">Tuesday</option>
+            <option value="2">Wednesday</option>
+            <option value="3">Thursday</option>
+            <option value="4">Friday</option>
+            <option value="5">Saturday</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <span>
+            <input type="submit" name="save" value="Save" />
+          </span>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
+      
