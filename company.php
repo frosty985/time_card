@@ -63,17 +63,13 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
       $comp_failed = true;
     }
 
-    if (strlen($_POST["pdate"])  == 10)
-    {
+    if (strlen($_POST["pdate"])  == 10) {
       $pdate = mysqli_real_escape_string($db, $_POST["pdate"]);
     }
-    else
-    {
-      $comp_failed = true;
-    }
+    else { $comp_failed = true; }
     
     if (isset($_POST["cdays"])) {
-      if (strlen($_POST["cdays"])) <= 2) {
+      if (strlen($_POST["cdays"]) <= 2) {
         $cdays = $_POST["cdays"];
       }
       else { $comp_failed = true; }
@@ -84,10 +80,7 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
       if (strlen($_POST["sweek"]) <= 2) {
         $sweek = $_POST["sweek"];
       }
-      else
-      {
-        $comp_failed = true;
-      }
+      else { $comp_failed = true; }
     }
     else { $comp_failed = true; }
     
