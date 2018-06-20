@@ -73,7 +73,7 @@ if (isset($_POST["comp"]) && isset($_POST["rate"]) && isset($_POST["edate"]))
     }
     
     if (isset($_POST["cdays"])) {
-      if (strlen($_POST["cdays"]) <= 2) {
+      if (strlen($_POST["cdays"])) <= 2) {
         $cdays = $_POST["cdays"];
       }
       else { $comp_failed = true; }
