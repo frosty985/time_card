@@ -2,7 +2,6 @@
 
 require_once("config.php");
 require_once("header.php");
-session_start();
 
 require_once("nav.php");
 
@@ -75,7 +74,7 @@ if ($pay_info["ptype"] == "month")
       $row_sql .= " ROUND(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime)))/60/60)*rate,2) AS \"rate\" ";
       $row_sql .= " FROM `time` ";
       $row_sql .= " JOIN user_comp on user_comp.uid = time.uid ";
-      $row_sql .= " WHERE time.uid='$uid' AND time.cid='$cid' AND tdate >= \"$cutoffdates\" ";
+      $row_sql .= " WHERE time.uid='$_SESSION[uid]' AND time.cid='$_SESSION[cid]' AND tdate >= \"$cutoffdates\" ";
       $row_sql .= " AND tdate <= \"$cutoffdatee\" ";
       $row_sql .= " GROUP BY rate, sType, stime, ftime) as maths ;";
 
@@ -132,7 +131,7 @@ else
       $row_sql .= " ROUND(SUM(TIME_TO_SEC(IF(sType=\"Break\",TIMEDIFF(stime, ftime),TIMEDIFF(ftime, stime)))/60/60)*rate,2) AS \"rate\" ";
       $row_sql .= " FROM `time` ";
       $row_sql .= " JOIN user_comp on user_comp.uid = time.uid ";
-      $row_sql .= " WHERE time.uid='$uid' AND time.cid='$cid' AND tdate >= \"$cutoffdates\" ";
+      $row_sql .= " WHERE time.uid='$_SESSION[uid]' AND time.cid='$_SESSION[cid]' AND tdate >= \"$cutoffdates\" ";
       $row_sql .= " AND tdate <= \"$cutoffdatee\" ";
       $row_sql .= " GROUP BY rate, sType, stime, ftime) as maths ;";
 
