@@ -37,8 +37,19 @@
 }
 
 nav {
-  padding: 8px;
-  margin: 2px;
+  /*padding-left: 10px;
+  padding-top: 5px;
+  padding-right: 10px;
+  margin: 0px;*/
+  padding-bottom: 20px;
+}
+
+nav > ul {
+  list-style-type: none;
+}
+
+nav > ul > li {
+ float: left;
 }
 
 nav h3 {
@@ -51,7 +62,12 @@ nav span {
   margin: 3px;
 }
   
-  
+.dbody {
+  padding-top: 5px;
+  margin-top: 0px;
+  border: solid 1px #000;
+}
+
 .dTable {
   display: table;
   border-collapse: collapse;
