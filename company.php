@@ -131,12 +131,14 @@ function check_form(frm)
 
 </script>
 
-<div class="login">
+<div class="center login">
   <form class="company" action="company.php" method="post" onsubmit="return check_form(this)">
     <div class="dTable">
-      <div class="dTableRow">
-        <div class="dTableCell" style="width: 100%">
+      <div class="dTableHeadRow">
+        <div class="dTableCell">
           <span><?php echo "$_SESSION[fname]"; ?>, Please choose your company, and enter your rate of pay.</span>
+        </div>
+        <div class="dTableCell bgWhite">
         </div>
       </div>
     
@@ -208,13 +210,13 @@ function check_form(frm)
         <div class="dTableCell">
           <label for="sweek">First day of the week</label>
           <select name="sweek">
-            <option value="-1">Sunday</option>
-            <option value="0">Monday</option>
-            <option value="1">Tuesday</option>
-            <option value="2">Wednesday</option>
-            <option value="3">Thursday</option>
-            <option value="4">Friday</option>
-            <option value="5">Saturday</option>
+            <option value="0">Sunday</option>
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
           </select>
         </div>
       </div>
@@ -224,6 +226,8 @@ function check_form(frm)
           <span>
             <input type="submit" name="save" value="Save" />
           </span>
+        </div>
+        <div class="dTableCell bgWhite">
         </div>
       </div>
     </div>

@@ -12,6 +12,9 @@ if (!isset($_SESSION["uid"]))
   exit();
 }
 
+$startDay_sql = "SELECT sweek FROM user_comp WHERE uid = \"$_SESSION[uid]\" AND cid = \"$_SESSION[cid]\"";
+$startDay = mysqli_fetch_array(mysqli_query($db, $startDay_sql));
+$sweek = $startDay["sweek"];
 
 if (!isset($_GET["start_date"]))
 {
@@ -131,7 +134,7 @@ for ($d = 0; $d < 7; $d++)
   //}
   //elseif ($d > date("w"))
   //{
-    $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+$d-date("w", $start_date), date("Y", $start_date));
+    $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+$d-date("w", $start_date)+$sweek, date("Y", $start_date));
   //}
   //else
   //{

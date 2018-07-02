@@ -33,7 +33,7 @@ if (isset($_POST["register"]))
       {
         mysqli_query($db, "DELETE FROM user WHERE uid = \"$user[uid]\"");
 ?>
-        <div class="login">
+        <div class="center">
           User creation has failed, please try again later.
         </div>
 <?php
@@ -51,11 +51,18 @@ if (isset($_POST["register"]))
 
 ?>
 
-<div class="login">
+<div class="center login">
   <form class="register" action="register.php" method="post">
     <div class="dTable">
+      <div class="dTableHeadRow">
+        <div class="dTableCell bgWhite">
+          </span>Create your user account</span>
+        </div>
+        <div class="dTableCell bgWhite">
+        </div>
+      </div>
       <div class="dTableRow">
-        <div class="dTableCell bgWhite" style="width: 100%">
+        <div class="dTableCell bgWhite">
           <span>
             <?php
             if ($user_check > 0)
@@ -71,6 +78,8 @@ if (isset($_POST["register"]))
               }
             ?> required />
           </span>
+        </div>
+        <div class="dTableCell bgWhite">
         </div>
       </div>
       
@@ -116,8 +125,10 @@ if (isset($_POST["register"]))
       </div>
       
       <div class="dTableRow">
-        <div class="dTableCell" style="width: 100%;">
+        <div class="dTableCell">
           <input type="submit" name="register" value="Register" />
+        </div>
+        <div class="dTableCell bgWhite">
         </div>
       </div>
     </div>
