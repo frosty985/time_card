@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $MySQL["user"] = "time_card";
 $MySQL["pass"] = "T1me_C@rd";
@@ -8,8 +9,6 @@ $MySQL["data"] = "time_card";
 $db = mysqli_connect($MySQL["host"], $MySQL["user"], $MySQL["pass"], $MySQL["data"]);
 
 $debug = "on";
-$uid = "0a25bf3160d211e899675254004146e6";
-$cid = "a406ab1860d111e899675254004146e6";
 
 if (!$db)
 {
