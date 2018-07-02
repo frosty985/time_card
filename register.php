@@ -33,7 +33,7 @@ if (isset($_POST["register"]))
       {
         mysqli_query($db, "DELETE FROM user WHERE uid = \"$user[uid]\"");
 ?>
-        <div class="login">
+        <div class="center">
           User creation has failed, please try again later.
         </div>
 <?php
@@ -51,55 +51,86 @@ if (isset($_POST["register"]))
 
 ?>
 
-<div class="login">
+<div class="center login">
   <form class="register" action="register.php" method="post">
-    <span>
-      <fieldset class="fsUser">
-        <?php
-        if ($user_check > 0)
-        {
-          echo "Sorry, that username is already taken";
-        }
-        ?>
-        <label for="uname">Username:</label>
-        <input name="uname" placeholder="username" <?php
-          if (isset($_POST["uname"]))
-          {
-            echo "value=\"$_POST[uname]\"";
-          }
-        ?> required />
-      </fieldset>
-    </span>
-    <fieldset class="fsName">
-      <span>
-        <label for="fname">First name:</label>
-        <input name="fname" placeholder="First name" <?php
-          if (isset($_POST["fname"]))
-          {
-            echo "value=\"$_POST[fname]\"";
-          }
-        ?> required />
-      </span>
-      <span>
-        <label for="lname">Last name:</label>
-        <input name="lname" placeholder="Last name" <?php
-          if (isset($_POST["lname"]))
-          {
-            echo "value=\"$_POST[lname]\"";
-          }
-        ?> required />
-      </span>
-    </fieldset>
-    <fieldset class="fsPass">
-      <span>
-        <label for="pass1">Password:</label>
-        <input name="pass1" placeholder="Password" required />
-      </span>
-      <span>
-        <label for="pass2">Reconfirm Password:</label>
-        <input name="pass2" placeholder="Password" required />
-      </span>
-    </fieldset>
-    <input type="submit" name="register" value="Register" />
+    <div class="dTable">
+      <div class="dTableHeadRow">
+        <div class="dTableCell bgWhite">
+          </span>Create your user account</span>
+        </div>
+        <div class="dTableCell bgWhite">
+        </div>
+      </div>
+      <div class="dTableRow">
+        <div class="dTableCell bgWhite">
+          <span>
+            <?php
+            if ($user_check > 0)
+            {
+              echo "Sorry, that username is already taken";
+            }
+            ?>
+            <label for="uname">Username:</label>
+            <input name="uname" placeholder="username" <?php
+              if (isset($_POST["uname"]))
+              {
+                echo "value=\"$_POST[uname]\"";
+              }
+            ?> required />
+          </span>
+        </div>
+        <div class="dTableCell bgWhite">
+        </div>
+      </div>
+      
+      <div class="dTableRow">
+        <div class="dTableCell bgWhite">
+          <span>
+            <label for="fname">First name:</label>
+            <input name="fname" placeholder="First name" <?php
+              if (isset($_POST["fname"]))
+              {
+                echo "value=\"$_POST[fname]\"";
+              }
+            ?> required />
+          </span>
+        </div>
+          
+        <div class="dTableCell bgWhite">
+          <span>
+            <label for="lname">Last name:</label>
+            <input name="lname" placeholder="Last name" <?php
+              if (isset($_POST["lname"]))
+              {
+                echo "value=\"$_POST[lname]\"";
+              }
+            ?> required />
+          </span>
+        </div>
+      </div>
+
+      <div class="dTableRow">
+        <div class="dTableCell bgWhite">
+          <span>
+            <label for="pass1">Password:</label>
+            <input name="pass1" placeholder="Password" required />
+          </span>
+        </div>
+        <div class="dTableCell">
+          <span>
+            <label for="pass2">Reconfirm Password:</label>
+            <input name="pass2" placeholder="Password" required />
+          </span>
+        </div>
+      </div>
+      
+      <div class="dTableRow">
+        <div class="dTableCell">
+          <input type="submit" name="register" value="Register" />
+        </div>
+        <div class="dTableCell bgWhite">
+        </div>
+      </div>
+    </div>
   </form>
 </div>

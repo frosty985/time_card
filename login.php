@@ -2,7 +2,6 @@
 
 require_once("config.php");
 require_once("header.php");
-session_start();
 
 $login = false;
 
@@ -16,9 +15,11 @@ if (isset($_POST["login"]))
     {
       $login = true;
       $hashd = password_hash($_POST['pWord'], PASSWORD_DEFAULT);
-      mysqli_query($db, "UPDATE pass SET hashd='$hashd', updated=NOW() WHERE uid='$uid'");
       $_SESSION["uid"] = $login_check["uid"];
       $_SESSION["fname"] = $login_check["fname"];      
+      
+      mysqli_query($db, "UPDATE pass SET hashd='$hashd', updated=NOW() WHERE uid='$_SESSION[uid]'");
+
     }
     else
     {
@@ -47,7 +48,7 @@ if ($login)
 
 ?>
 
-<div class="login">
+<div class="login center">
   You must be logged in to access this site.
 <?php
   if (isset($_POST["login"]) && !$login)
