@@ -39,3 +39,8 @@ nav h3 {
 nav span {
 	color: black;
 }
+
+bgWhite {
+  background: white;
+  color: black;
+}

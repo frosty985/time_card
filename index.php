@@ -11,6 +11,10 @@ if (!isset($_SESSION["uid"]))
   exit();
 }
 
+$startDay_sql = "SELECT sweek FROM user_comp WHERE uid = \"$_SESSION[uid]\" AND cid = \"$_SESSION[cid]\"";
+$startDay = mysqli_fetch_array(mysqli_query($db, $startDay_sql));
+$sweek = $startDay["sweek"];
+
 if (!isset($_GET["start_date"]))
 {
   $start_date = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
@@ -60,6 +64,18 @@ echo "        </div>\n";
 for ($d = 0; $d < 7; $d++)
 {
   /// create a "date" based on differance of days of today and loop number
+  //if ($d < date("w"))
+  //{
+  //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)-$d+date("w", $start_date), date("Y", $start_date));
+  //}
+  //elseif ($d > date("w"))
+  //{
+  //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+$d-date("w", $start_date)+$sweek, date("Y", $start_date));
+  //}
+  //else
+  //{
+  //  $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date), date("Y", $start_date));
+  //}
     $mkd = mktime(0, 0, 0, date("m", $start_date), date("d", $start_date)+$d-date("w", $start_date)+$sweek, date("Y", $start_date));
 
   // build query
